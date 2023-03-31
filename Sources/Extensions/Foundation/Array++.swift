@@ -9,7 +9,7 @@ import Foundation
 
 extension Array: ThenExtensionCompatible { }
 
-public extension ThenExtension where T: ArrayPutaoable {
+public extension ThenExtension where T: ArraySafeable {
     
     /// random one element
     var anyOne: T.Element? {
@@ -48,7 +48,7 @@ public extension ThenExtension where T: ArrayPutaoable {
     }
 }
 
-public protocol ArrayPutaoable {
+public protocol ArraySafeable {
     
     associatedtype Element
     
@@ -67,7 +67,7 @@ public protocol ArrayPutaoable {
     mutating func safeRemoveLast() -> Element?
 }
 
-extension Array: ArrayPutaoable {
+extension Array: ArraySafeable {
     
     public var anyOne: Element? {
         guard count > 0 else { return nil }
