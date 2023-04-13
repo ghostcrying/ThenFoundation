@@ -12,7 +12,7 @@ import CryptoKit
 #endif
 import CommonCrypto
 
-//MARK: - MD5
+// MARK: - MD5
 public extension String {
     
     var md5: String {
@@ -22,7 +22,13 @@ public extension String {
             }
             return ""
         } else {
-            return legacyMD5String()
+            let data = Data(self.utf8)
+            let hash = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+                var hash = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+                CC_MD5(bytes.baseAddress, CC_LONG(data.count), &hash)
+                return hash
+            }
+            return hash.map { String(format: "%02hhx", $0) }.joined()
         }
     }
     
@@ -33,18 +39,30 @@ public extension String {
             }
             return Data()
         } else {
-            return legacyMD5Data()
+            let data = Data(self.utf8)
+            let hash = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+                var hash = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+                CC_MD5(bytes.baseAddress, CC_LONG(data.count), &hash)
+                return hash
+            }
+            return Data(hash)
         }
     }
     
 }
 
 
-//MARK: - HMAC加密类型
+// MARK: - HMAC加密类型定义
 public enum HMACAlgorithm {
-    case md5, sha1, sha224, sha256, sha384, sha512
+    case SHA1
+    case SHA224 // iOS13+: Insecure不支持
+    case SHA256
+    case SHA384
+    case SHA512
 }
 
+
+// MARK: - String的HMAC加密
 public extension String {
     
     /// self: 被加密字段
@@ -61,43 +79,19 @@ public extension String {
 
 private extension String {
     
-    @available(iOS, introduced: 2.0, deprecated: 13.0)
-    func legacyMD5Data() -> Data {
-        let str = self.cString(using: String.Encoding.utf8) ?? []
-        let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
-        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-        defer { result.deallocate() }
-        CC_MD5(str, strLen, result)
-        return Data(bytes: result, count: digestLen)
-    }
-    
-    @available(iOS, introduced: 2.0, deprecated: 13.0)
-    func legacyMD5String() -> String {
-        let str = self.cString(using: String.Encoding.utf8) ?? []
-        let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
-        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-        defer { result.deallocate() }
-        CC_MD5(str, strLen, result)
-        return stringFromResult(result: result, length: digestLen)
-    }
-    
     func HMACAlgorithmString(_ algorithm: HMACAlgorithm, salt: String) -> String {
         let t: CCHmacAlgorithm = {
             var result: Int = 0
             switch algorithm {
-            case .md5:
-                result = kCCHmacAlgMD5
-            case .sha1:
+            case .SHA1:
                 result = kCCHmacAlgSHA1
-            case .sha224:
+            case .SHA224:
                 result = kCCHmacAlgSHA224
-            case .sha256:
+            case .SHA256:
                 result = kCCHmacAlgSHA256
-            case .sha384:
+            case .SHA384:
                 result = kCCHmacAlgSHA384
-            case .sha512:
+            case .SHA512:
                 result = kCCHmacAlgSHA512
             }
             return CCHmacAlgorithm(result)
@@ -106,17 +100,15 @@ private extension String {
         let l: Int = {
             var result: CInt = 0
             switch algorithm {
-            case .md5:
-                result = CC_MD5_DIGEST_LENGTH
-            case .sha1:
+            case .SHA1:
                 result = CC_SHA1_DIGEST_LENGTH
-            case .sha224:
+            case .SHA224:
                 result = CC_SHA224_DIGEST_LENGTH
-            case .sha256:
+            case .SHA256:
                 result = CC_SHA256_DIGEST_LENGTH
-            case .sha384:
+            case .SHA384:
                 result = CC_SHA384_DIGEST_LENGTH
-            case .sha512:
+            case .SHA512:
                 result = CC_SHA512_DIGEST_LENGTH
             }
             return Int(result)
@@ -131,21 +123,18 @@ private extension String {
     }
     
     func HMACAlgorithmData(_ algorithm: HMACAlgorithm, salt: String) -> Data {
-        
         let t: CCHmacAlgorithm = {
             var result: Int = 0
             switch algorithm {
-            case .md5:
-                result = kCCHmacAlgMD5
-            case .sha1:
+            case .SHA1:
                 result = kCCHmacAlgSHA1
-            case .sha224:
+            case .SHA224:
                 result = kCCHmacAlgSHA224
-            case .sha256:
+            case .SHA256:
                 result = kCCHmacAlgSHA256
-            case .sha384:
+            case .SHA384:
                 result = kCCHmacAlgSHA384
-            case .sha512:
+            case .SHA512:
                 result = kCCHmacAlgSHA512
             }
             return CCHmacAlgorithm(result)
@@ -154,17 +143,15 @@ private extension String {
         let l: Int = {
             var result: CInt = 0
             switch algorithm {
-            case .md5:
-                result = CC_MD5_DIGEST_LENGTH
-            case .sha1:
+            case .SHA1:
                 result = CC_SHA1_DIGEST_LENGTH
-            case .sha224:
+            case .SHA224:
                 result = CC_SHA224_DIGEST_LENGTH
-            case .sha256:
+            case .SHA256:
                 result = CC_SHA256_DIGEST_LENGTH
-            case .sha384:
+            case .SHA384:
                 result = CC_SHA384_DIGEST_LENGTH
-            case .sha512:
+            case .SHA512:
                 result = CC_SHA512_DIGEST_LENGTH
             }
             return Int(result)
@@ -178,34 +165,30 @@ private extension String {
         return Data(bytes: result, count: l)
     }
     
+    // Insecure不支持sha224加密
     @available(iOS 13.0, *)
     func InsecureAlgorithmString(_ algorithm: HMACAlgorithm, salt: String) -> String {
         guard let keyData = data(using: .utf8), let saltData = salt.data(using: .utf8) else {
             return ""
         }
         switch algorithm {
-        case .sha1:
+        case .SHA1:
             return HMAC<Insecure.SHA1>
                 .authenticationCode(for: keyData, using: .init(data: saltData))
                 .map { String(format: "%02hhx", $0) }
                 .joined()
-        case .sha256:
+        case .SHA256:
             return HMAC<SHA256>
                 .authenticationCode(for: keyData, using: .init(data: saltData))
                 .map { String(format: "%02hhx", $0) }
                 .joined()
-        case .sha512:
+        case .SHA512:
             return HMAC<SHA512>
                 .authenticationCode(for: keyData, using: .init(data: saltData))
                 .map { String(format: "%02hhx", $0) }
                 .joined()
-        case .sha384:
+        case .SHA384:
             return HMAC<SHA384>
-                .authenticationCode(for: keyData, using: .init(data: saltData))
-                .map { String(format: "%02hhx", $0) }
-                .joined()
-        case .md5:
-            return HMAC<Insecure.MD5>
                 .authenticationCode(for: keyData, using: .init(data: saltData))
                 .map { String(format: "%02hhx", $0) }
                 .joined()
@@ -214,22 +197,21 @@ private extension String {
         }
     }
     
+    // Insecure不支持sha224加密
     @available(iOS 13.0, *)
     func InsecureAlgorithmData(_ algorithm: HMACAlgorithm, salt: String) -> Data {
         guard let keyData = data(using: .utf8), let saltData = salt.data(using: .utf8) else {
             return Data()
         }
         switch algorithm {
-        case .sha1:
+        case .SHA1:
             return Data(HMAC<Insecure.SHA1>.authenticationCode(for: keyData, using: .init(data: saltData)))
-        case .sha256:
+        case .SHA256:
             return Data(HMAC<SHA256>.authenticationCode(for: keyData, using: .init(data: saltData)))
-        case .sha512:
+        case .SHA512:
             return Data(HMAC<SHA512>.authenticationCode(for: keyData, using: .init(data: saltData)))
-        case .sha384:
+        case .SHA384:
             return Data(HMAC<SHA384>.authenticationCode(for: keyData, using: .init(data: saltData)))
-        case .md5:
-            return Data(HMAC<Insecure.MD5>.authenticationCode(for: keyData, using: .init(data: saltData)))
         default:
             return Data()
         }
@@ -239,7 +221,7 @@ private extension String {
     func stringFromResult(result: UnsafeMutablePointer<CUnsignedChar>, length: Int) -> String {
         let hash = NSMutableString()
         for i in 0..<length {
-            hash.appendFormat("%02x", result[i])
+            hash.appendFormat("%02hhx", result[i])
         }
         return String(hash).lowercased()
     }

@@ -232,7 +232,7 @@ public extension ThenExtension where T == String {
     }
 }
 
-
+// MARK: - Error
 public extension ThenExtension where T == String {
     
     var asError: Error {
@@ -263,7 +263,7 @@ public extension ThenExtension where T == String {
     }
 }
 
-///
+// MARK: - Operate
 public extension String {
     
     func subString(to index: Int) -> String {
@@ -347,4 +347,31 @@ public extension ThenExtension where T == String {
         return lists
     }
     
+}
+
+
+// MARK: - Random String
+private let _random_resource_: [String] = ["A", "B", "C", "D", "E", "F",
+                                           "G", "H", "I", "J", "K", "L",
+                                           "M", "N", "O", "P", "Q", "R",
+                                           "S", "T", "U", "V", "W", "X",
+                                           "Y", "Z", "1", "2", "3", "4",
+                                           "5", "6", "7", "8", "9", "0",
+                                           "a", "b", "c", "d", "e", "f",
+                                           "g", "h", "i", "j", "k", "l",
+                                           "m", "n", "o", "p", "q", "r",
+                                           "s", "t", "u", "v", "w", "x",
+                                           "y", "z"]
+public extension String {
+    
+    /// random string from a~zA~Z1~9
+    func randomWords(_ count: Int) -> String {
+        var res: [String] = []
+        while res.count < count {
+            if let rv = _random_resource_.anyOne {
+                res.append(rv)
+            }
+        }
+        return res.joined()
+    }
 }
