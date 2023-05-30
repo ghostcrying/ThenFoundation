@@ -55,11 +55,11 @@ private class Constrant {
     }()
 }
 
-/// 格式化打印
-public func printlog<T>(_ message: T,
-                        file: String = #file,
-                        line: Int = #line,
-                        method: String = #function) {
+/// 格式化打印: 打印应该有项目本身去配置, 不需要三方库来提供
+func printlog<T>(_ message: T,
+                 file: String = #file,
+                 line: Int = #line,
+                 method: String = #function) {
     let date = Constrant.shared.dateformatter.string(from: Date())
     let text = "[THEN] [\(date)] [\((file as NSString).lastPathComponent) line: \(line), method: \(method)]: \n\(message)"
     if isDebug {
