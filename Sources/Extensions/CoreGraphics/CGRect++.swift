@@ -31,52 +31,52 @@ public extension CGRect {
 public extension ThenExtension where T == CGRect {
     
     var top: CGFloat {
-        return base.minY
+        return value.minY
     }
     
     var left: CGFloat {
-        return base.minX
+        return value.minX
     }
     
     var bottom: CGFloat {
-        return base.maxY
+        return value.maxY
     }
     
     var right: CGFloat {
-        return base.maxX
+        return value.maxX
     }
     
     var center: CGPoint {
-        return CGPoint(x: base.midX, y: base.midY)
-        // set { base.origin = CGPoint(x: base.minX + newValue.x - base.midX, y: base.minY + newValue.y - base.midY) }
+        return CGPoint(x: value.midX, y: value.midY)
+        // set { value.origin = CGPoint(x: value.minX + newValue.x - value.midX, y: value.minY + newValue.y - value.midY) }
     }
     
     var centerX: CGFloat {
-        return base.midX
+        return value.midX
     }
     
     var centerY: CGFloat {
-        return base.midY
+        return value.midY
     }
 }
 
 public extension ThenExtension where T == CGRect {
     
     var bounds: CGRect {
-        return CGRect(width: base.width, height: base.height)
+        return CGRect(width: value.width, height: value.height)
     }
 }
 
 public extension ThenExtension where T == CGRect {
     
     func scale(_ scale: CGFloat) -> T {
-        return base * scale
+        return value * scale
     }
 }
 
 public extension ThenExtension where T == Array<CGRect> {
     
     func scale(_ scale: CGFloat) -> [T.Element] {
-        return base.compactMap { $0 * scale }
+        return value.compactMap { $0 * scale }
     }
 }

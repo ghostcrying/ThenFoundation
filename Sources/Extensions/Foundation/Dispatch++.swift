@@ -13,6 +13,6 @@ public extension ThenExtension where T: DispatchQueue {
     func delay(_ second: TimeInterval, _ callback: @escaping () -> ()) {
         let microSeconds = second * TimeInterval(NSEC_PER_MSEC)
         let deadline = DispatchTime.now() + .microseconds(Int(microSeconds))
-        base.asyncAfter(deadline: deadline, execute: callback)
+        value.asyncAfter(deadline: deadline, execute: callback)
     }
 }

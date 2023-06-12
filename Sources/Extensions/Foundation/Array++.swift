@@ -13,38 +13,38 @@ public extension ThenExtension where T: ArraySafeable {
     
     /// random one element
     var anyOne: T.Element? {
-        return base.anyOne
+        return value.anyOne
     }
     
     /// [1, [2, 3], [4, [5, 6, [7, 8]]]] --> [1, 2, 3, 4, 5, 6, 7, 8]
     var reduction: [T.Element] {
-        return base.reduction
+        return value.reduction
     }
     
     /// random all elements index
     func randomAll() -> [T.Element] {
-        return base.randomAll()
+        return value.randomAll()
     }
     
     ///
     subscript (safe index: Int) -> T.Element? {
-        get { return base[safe: index] }
-        set { base[safe: index] = newValue }
+        get { return value[safe: index] }
+        set { value[safe: index] = newValue }
     }
     
     ///
     mutating func append(_ object: T.Element?) -> Array<T.Element> {
-        return base.safeAppend(object)
+        return value.safeAppend(object)
     }
     
     ///
     mutating func insert(_ object: T.Element?, at index: Int) -> Array<T.Element> {
-        return base.safeInsert(object, at: index)
+        return value.safeInsert(object, at: index)
     }
     
     ///
     mutating func remove(at index: Int) -> Array<T.Element> {
-        return base.safeRemove(at: index)
+        return value.safeRemove(at: index)
     }
 }
 

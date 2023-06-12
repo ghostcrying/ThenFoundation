@@ -15,7 +15,7 @@ public protocol ClassNameable {
 public extension ThenExtension where T: ClassNameable {
     
     var className: String? {
-        return base.className
+        return value.className
     }
 }
 

@@ -12,26 +12,26 @@ public extension ThenExtension where T: NSObject {
     /// eg: instance.then.addNotification(name: xxx, object: xxx) { notification in }
     @discardableResult
     func addNotification(name: NSNotification.Name?, object anObject: Any?, _ closure: @escaping (Notification) -> Void) -> ThenExtension {
-        var temp: [ObserverNotificationTarget] = base.kit_notificationTargets ?? []
+        var temp: [ObserverNotificationTarget] = value.kit_notificationTargets ?? []
         let target = ObserverNotificationTarget(name: name, object: anObject) {
             closure($0)
         }
         temp.append(target)
-        base.kit_notificationTargets = temp
+        value.kit_notificationTargets = temp
         return self
     }
     
     @discardableResult
     func removeNotification() -> ThenExtension {
-        base.kit_notificationTargets?.forEach({ $0.dispose() })
-        base.kit_notificationTargets?.removeAll()
+        value.kit_notificationTargets?.forEach({ $0.dispose() })
+        value.kit_notificationTargets?.removeAll()
         return self
     }
     
     @discardableResult
     func removeNotification(name: NSNotification.Name?) -> ThenExtension {
-        base.kit_notificationTargets?.filter({ $0.name == name || $0.callback == nil }).forEach({ $0.dispose() })
-        base.kit_notificationTargets = base.kit_notificationTargets?.filter({ $0.name != name && $0.callback != nil })
+        value.kit_notificationTargets?.filter({ $0.name == name || $0.callback == nil }).forEach({ $0.dispose() })
+        value.kit_notificationTargets = value.kit_notificationTargets?.filter({ $0.name != name && $0.callback != nil })
         return self
     }
 }
@@ -77,35 +77,35 @@ public extension ThenExtension where T == NotificationCenter {
                      selector aSelector: Selector,
                      name aName: NSNotification.Name?,
                      object anObject: Any? = nil) {
-        base.addObserver(observer, selector: aSelector, name: aName, object: anObject)
+        value.addObserver(observer, selector: aSelector, name: aName, object: anObject)
     }
     
     func removeObserver(_ observer: Any?) {
-        if let obs = observer { base.removeObserver(obs) }
+        if let obs = observer { value.removeObserver(obs) }
     }
     
     func removeObserver(_ observer: Any,
                         name aName: NSNotification.Name?,
                         object anObject: Any? = nil) {
-        base.removeObserver(observer, name: aName, object: anObject)
+        value.removeObserver(observer, name: aName, object: anObject)
     }
     
     func post(queue: DispatchQueue,
               _ notification: Notification) {
-        queue.async { [weak base] in base?.post(notification) }
+        queue.async { [weak value] in value?.post(notification) }
     }
     
     func post(queue: DispatchQueue,
               name aName: NSNotification.Name,
               object anObject: Any? = nil) {
-        queue.async { [weak base] in base?.post(name: aName, object: anObject) }
+        queue.async { [weak value] in value?.post(name: aName, object: anObject) }
     }
     
     func post(queue: DispatchQueue,
               name aName: NSNotification.Name,
               object anObject: Any? = nil,
               userInfo aUserInfo: [AnyHashable : Any]? = nil) {
-        queue.async { [weak base] in base?.post(name: aName, object: anObject, userInfo: aUserInfo) }
+        queue.async { [weak value] in value?.post(name: aName, object: anObject, userInfo: aUserInfo) }
     }
     
     @available(iOS 4.0, *)
@@ -114,6 +114,6 @@ public extension ThenExtension where T == NotificationCenter {
                      object obj: Any? = nil,
                      queue: OperationQueue? = .main,
                      using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
-        return base.addObserver(forName: name, object: obj, queue: queue, using: block)
+        return value.addObserver(forName: name, object: obj, queue: queue, using: block)
     }
 }

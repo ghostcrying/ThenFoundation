@@ -16,13 +16,13 @@ public extension ThenExtension where T == Data {
     /// iOS 13+ : Insecure.SHA1
     /// iOS 13- : CC_SHA1
     var sha1String: String {
-        return base.sha1String
+        return value.sha1String
     }
     
     /// iOS 13+ : Insecure.SHA1
     /// iOS 13- : CC_SHA1
     var sha1Data: Data {
-        return base.sha1Data
+        return value.sha1Data
     }
     
 }

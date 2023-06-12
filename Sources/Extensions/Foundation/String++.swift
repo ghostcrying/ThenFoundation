@@ -14,66 +14,66 @@ public extension ThenExtension where T == String {
     
     /// MD5
     var md5: String {
-        return base.md5
+        return value.md5
     }
     
     func hmac(_ algorithm: HMACAlgorithm, key: String) -> String {
-        return base.HMACString(algorithm, salt: key)
+        return value.HMACString(algorithm, salt: key)
     }
     
     /// encoding urlHostAllowed
     var urlEscaped: String {
-        return base.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        return value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
     
     /// "0" -> true; "*" -> false
     var isNumeric: Bool {
-        guard !base.isEmpty else { return false }
-        return base.trimmingCharacters(in: .decimalDigits).isEmpty
+        guard !value.isEmpty else { return false }
+        return value.trimmingCharacters(in: .decimalDigits).isEmpty
     }
     
     /// trimming whitespaces
     var trim: String {
-        return base.trimmingCharacters(in: .whitespaces)
+        return value.trimmingCharacters(in: .whitespaces)
     }
     
     /// remove " "
     var withoutSpaces: String {
-        return base.replacingOccurrences(of: " ", with: "")
+        return value.replacingOccurrences(of: " ", with: "")
     }
     
     /// trimming whitespacesAndNewlines
     var withoutSpaceAndNewlines: String {
-        return base.trimmingCharacters(in: .whitespacesAndNewlines)
+        return value.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     /// remove "\r"、"\n"
     var removeNewLineString: String {
-        return base.replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")
+        return value.replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")
     }
     
     /// trimming whitespacesAndNewlines, then remove "\r"、"\n"
     var trimmingString: String {
-        return base.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")
+        return value.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")
     }
     
     func appendingPathComponent(_ path: String) -> String {
-        return (base as NSString).appendingPathComponent(path)
+        return (value as NSString).appendingPathComponent(path)
     }
     
     func insert(_ string: String, at index: Int) -> String {
-        return String(base.prefix(index)) + string + String(base.suffix(base.count - index))
+        return String(value.prefix(index)) + string + String(value.suffix(value.count - index))
     }
     
     /// encoding \"\'[]:/?&=;+!@#$()',*{}\\<>%^`
     var addingPercentEncoding: String? {
-        return base.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "\"\'[]:/?&=;+!@#$()',*{}\\<>%^`").inverted)
+        return value.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "\"\'[]:/?&=;+!@#$()',*{}\\<>%^`").inverted)
     }
     
     /// string -> [String:String]
     var queryDictionary: [String: String] {
         guard
-            let urlString = base.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let urlString = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: urlString),
             let query = url.query else {
             return [:]
@@ -90,7 +90,7 @@ public extension ThenExtension where T == String {
     
     /// remove ^[\u{00000}-\u{FFFFF}]
     var removeNonBmpUnicode: String? {
-        return base.replacingOccurrences(of: "^[\u{00000}-\u{FFFFF}]", with: "")
+        return value.replacingOccurrences(of: "^[\u{00000}-\u{FFFFF}]", with: "")
     }
 }
 
@@ -100,34 +100,34 @@ public extension ThenExtension where T == String {
     
     /// -> url -> .scheme
     var scheme: String? {
-        return URLComponents(string: base)?.scheme
+        return URLComponents(string: value)?.scheme
     }
     
     /// -> url -> .host
     var host: String? {
-        return URLComponents(string: base)?.host
+        return URLComponents(string: value)?.host
     }
     
     /// -> url -> .query
     var query: String? {
-        return URLComponents(string: base)?.query
+        return URLComponents(string: value)?.query
     }
     
     /// -> url -> queryItems -> value for key
     func queryValue(for key: String) -> Int?  {
-        return URLComponents(string: base)?.queryItems?.filter { $0.name == key }.first?.value?.intValue
+        return URLComponents(string: value)?.queryItems?.filter { $0.name == key }.first?.value?.intValue
     }
     
     func queryValue(for key: String) -> Float?  {
-        return URLComponents(string: base)?.queryItems?.filter { $0.name == key }.first?.value?.floatValue
+        return URLComponents(string: value)?.queryItems?.filter { $0.name == key }.first?.value?.floatValue
     }
     
     func queryValue(for key: String) -> Double?  {
-        return URLComponents(string: base)?.queryItems?.filter { $0.name == key }.first?.value?.doubleValue
+        return URLComponents(string: value)?.queryItems?.filter { $0.name == key }.first?.value?.doubleValue
     }
     
     func queryValue(for key: String) -> String?  {
-        return URLComponents(string: base)?.queryItems?.filter { $0.name == key }.first?.value
+        return URLComponents(string: value)?.queryItems?.filter { $0.name == key }.first?.value
     }
 }
 
@@ -137,8 +137,8 @@ public extension ThenExtension where T == String {
     
     func dot(_ count: Int) -> T {
         let separator = "."
-        let components = base.components(separatedBy: separator)
-        if components.count > 2 { return base }
+        let components = value.components(separatedBy: separator)
+        if components.count > 2 { return value }
         let holder = "0"
         var first = components.first ?? holder
         if first.count == 0 {
@@ -168,15 +168,15 @@ extension String {
 public extension ThenExtension where T == String {
     
     var intValue: Int? {
-        return base.intValue
+        return value.intValue
     }
     
     var floatValue: Float? {
-        return base.floatValue
+        return value.floatValue
     }
     
     var doubleValue: Double? {
-        return base.doubleValue
+        return value.doubleValue
     }
 }
 
@@ -192,7 +192,7 @@ extension String {
 public extension ThenExtension where T == String {
     
     func toJsonObject() -> Any? {
-        return base.toJsonObject()
+        return value.toJsonObject()
     }
 }
 
@@ -220,15 +220,15 @@ extension String {
 public extension ThenExtension where T == String {
     
     func fill(_ placeholder: String) -> String {
-        return base.fill(placeholder)
+        return value.fill(placeholder)
     }
     
     func fill(_ placeholder: Character, limit: Int) -> String {
-        return base.fill(placeholder, limit: limit)
+        return value.fill(placeholder, limit: limit)
     }
     
     func insert(_ placeholder: Character, limit: Int) -> String {
-        return base.insert(placeholder, limit: limit)
+        return value.insert(placeholder, limit: limit)
     }
 }
 
@@ -236,30 +236,30 @@ public extension ThenExtension where T == String {
 public extension ThenExtension where T == String {
     
     var asError: Error {
-        return NSError(domain: NSError.NormalErrorDomain, code: -1, description: base)
+        return NSError(domain: NSError.NormalErrorDomain, code: -1, description: value)
     }
     
     func asError(domain: String = NSError.NormalErrorDomain, code: Int = -1) -> Error {
-        return NSError(domain: domain, code: code, description: base)
+        return NSError(domain: domain, code: code, description: value)
     }
 }
 
 public extension ThenExtension where T == String {
     
     func firstComponent(separatedBy: String) -> String? {
-        return base.components(separatedBy: separatedBy).first
+        return value.components(separatedBy: separatedBy).first
     }
     
     func firstComponent(separatedBy: CharacterSet) -> String? {
-        return base.components(separatedBy: separatedBy).first
+        return value.components(separatedBy: separatedBy).first
     }
     
     func lastComponent(separatedBy: String) -> String? {
-        return base.components(separatedBy: separatedBy).last
+        return value.components(separatedBy: separatedBy).last
     }
     
     func lastComponent(separatedBy: CharacterSet) -> String? {
-        return base.components(separatedBy: separatedBy).last
+        return value.components(separatedBy: separatedBy).last
     }
 }
 
@@ -330,7 +330,7 @@ public extension ThenExtension where T == String {
         guard let regular = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) else {
             return nil
         }
-        let range = regular.rangeOfFirstMatch(in: base, range: NSRange(location: 0, length: base.count))
+        let range = regular.rangeOfFirstMatch(in: value, range: NSRange(location: 0, length: value.count))
         if range.length == 0 {
             return nil
         }
@@ -341,8 +341,8 @@ public extension ThenExtension where T == String {
         guard let regular = try? NSRegularExpression(pattern: pattern, options: []) else {
             return []
         }
-        let lists = regular.matches(in: base, range: NSRange(location: 0, length: base.count)).map { r in
-            return base.subString(r.range)
+        let lists = regular.matches(in: value, range: NSRange(location: 0, length: value.count)).map { r in
+            return value.subString(r.range)
         }
         return lists
     }

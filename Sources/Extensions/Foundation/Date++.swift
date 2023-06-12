@@ -14,7 +14,7 @@ private let weekdays: Array = ["周日", "周一", "周二", "周三", "周四",
 public extension ThenExtension where T == Date {
     
     /// ThenFoundation: User’s current seconds.
-    // var second: Second { return base.timeIntervalSince1970.second }
+    // var second: Second { return value.timeIntervalSince1970.second }
     
     /// ThenFoundation: User’s current calendar.
     var calendar: Calendar {
@@ -27,7 +27,7 @@ public extension ThenExtension where T == Date {
     ///        Date().then.era -> 1
     ///
     var era: Int {
-        return calendar.component(.era, from: base)
+        return calendar.component(.era, from: value)
     }
 
     #if !os(Linux)
@@ -36,7 +36,7 @@ public extension ThenExtension where T == Date {
     ///        Date().then.quarter -> 3 // date in third quarter of the year.
     ///
     var quarter: Int {
-        let month = Double(calendar.component(.month, from: base))
+        let month = Double(calendar.component(.month, from: value))
         let numberOfMonths = Double(calendar.monthSymbols.count)
         let numberOfMonthsInQuarter = numberOfMonths / 4
         return Int(Darwin.ceil(month / numberOfMonthsInQuarter))
@@ -48,7 +48,7 @@ public extension ThenExtension where T == Date {
     ///        Date().then.weekOfYear -> 2 // second week in the year.
     ///
     var weekOfYear: Int {
-        return calendar.component(.weekOfYear, from: base)
+        return calendar.component(.weekOfYear, from: value)
     }
 
     /// ThenFoundation: Week of month.
@@ -56,7 +56,7 @@ public extension ThenExtension where T == Date {
     ///        Date().then.weekOfMonth -> 3 // date is in third week of the month.
     ///
     var weekOfMonth: Int {
-        return calendar.component(.weekOfMonth, from: base)
+        return calendar.component(.weekOfMonth, from: value)
     }
 
     /// ThenFoundation: Year.
@@ -68,14 +68,14 @@ public extension ThenExtension where T == Date {
     ///
     var year: Int {
         get {
-            return calendar.component(.year, from: base)
+            return calendar.component(.year, from: value)
         }
         set {
             guard newValue > 0 else { return }
-            let currentYear = calendar.component(.year, from: base)
+            let currentYear = calendar.component(.year, from: value)
             let yearsToAdd = newValue - currentYear
-            if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -89,16 +89,16 @@ public extension ThenExtension where T == Date {
     ///
     var month: Int {
         get {
-            return calendar.component(.month, from: base)
+            return calendar.component(.month, from: value)
         }
         set {
-            let allowedRange = calendar.range(of: .month, in: .year, for: base)!
+            let allowedRange = calendar.range(of: .month, in: .year, for: value)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentMonth = calendar.component(.month, from: base)
+            let currentMonth = calendar.component(.month, from: value)
             let monthsToAdd = newValue - currentMonth
-            if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -112,16 +112,16 @@ public extension ThenExtension where T == Date {
     ///
     var day: Int {
         get {
-            return calendar.component(.day, from: base)
+            return calendar.component(.day, from: value)
         }
         set {
-            let allowedRange = calendar.range(of: .day, in: .month, for: base)!
+            let allowedRange = calendar.range(of: .day, in: .month, for: value)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentDay = calendar.component(.day, from: base)
+            let currentDay = calendar.component(.day, from: value)
             let daysToAdd = newValue - currentDay
-            if let date = calendar.date(byAdding: .day, value: daysToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .day, value: daysToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -131,7 +131,7 @@ public extension ThenExtension where T == Date {
     ///     Date().then.weekday -> 5 // fifth day in the current week.
     ///
     var weekday: Int {
-        return calendar.component(.weekday, from: base)
+        return calendar.component(.weekday, from: value)
     }
     
     /// 星期的中文描述 -> ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
@@ -148,16 +148,16 @@ public extension ThenExtension where T == Date {
     ///
     var hour: Int {
         get {
-            return calendar.component(.hour, from: base)
+            return calendar.component(.hour, from: value)
         }
         set {
-            let allowedRange = calendar.range(of: .hour, in: .day, for: base)!
+            let allowedRange = calendar.range(of: .hour, in: .day, for: value)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentHour = calendar.component(.hour, from: base)
+            let currentHour = calendar.component(.hour, from: value)
             let hoursToAdd = newValue - currentHour
-            if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -171,16 +171,16 @@ public extension ThenExtension where T == Date {
     ///
     var minute: Int {
         get {
-            return calendar.component(.minute, from: base)
+            return calendar.component(.minute, from: value)
         }
         set {
-            let allowedRange = calendar.range(of: .minute, in: .hour, for: base)!
+            let allowedRange = calendar.range(of: .minute, in: .hour, for: value)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentMinutes = calendar.component(.minute, from: base)
+            let currentMinutes = calendar.component(.minute, from: value)
             let minutesToAdd = newValue - currentMinutes
-            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -194,16 +194,16 @@ public extension ThenExtension where T == Date {
     ///
     var second: Int {
         get {
-            return calendar.component(.second, from: base)
+            return calendar.component(.second, from: value)
         }
         set {
-            let allowedRange = calendar.range(of: .second, in: .minute, for: base)!
+            let allowedRange = calendar.range(of: .second, in: .minute, for: value)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentSeconds = calendar.component(.second, from: base)
+            let currentSeconds = calendar.component(.second, from: value)
             let secondsToAdd = newValue - currentSeconds
-            if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -217,22 +217,22 @@ public extension ThenExtension where T == Date {
     ///
     var nanosecond: Int {
         get {
-            return calendar.component(.nanosecond, from: base)
+            return calendar.component(.nanosecond, from: value)
         }
         set {
             #if targetEnvironment(macCatalyst)
             // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
             let allowedRange = 0..<1_000_000_000
             #else
-            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
+            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: value)!
             #endif
             guard allowedRange.contains(newValue) else { return }
 
-            let currentNanoseconds = calendar.component(.nanosecond, from: base)
+            let currentNanoseconds = calendar.component(.nanosecond, from: value)
             let nanosecondsToAdd = newValue - currentNanoseconds
 
-            if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: base) {
-                base = date
+            if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: value) {
+                value = date
             }
         }
     }
@@ -246,7 +246,7 @@ public extension ThenExtension where T == Date {
     ///
     var millisecond: Int {
         get {
-            return calendar.component(.nanosecond, from: base) / 1_000_000
+            return calendar.component(.nanosecond, from: value) / 1_000_000
         }
         set {
             let nanoSeconds = newValue * 1_000_000
@@ -254,12 +254,12 @@ public extension ThenExtension where T == Date {
             // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
             let allowedRange = 0..<1_000_000_000
             #else
-            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
+            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: value)!
             #endif
             guard allowedRange.contains(nanoSeconds) else { return }
 
-            if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: base) {
-                base = date
+            if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: value) {
+                value = date
             }
         }
     }
@@ -269,7 +269,7 @@ public extension ThenExtension where T == Date {
     ///     Date(timeInterval: 100, since: Date()).isInFuture -> true
     ///
     var isInFuture: Bool {
-        return base > Date()
+        return value > Date()
     }
 
     /// ThenFoundation: Check if date is in past.
@@ -277,7 +277,7 @@ public extension ThenExtension where T == Date {
     ///     Date(timeInterval: -100, since: Date()).isInPast -> true
     ///
     var isInPast: Bool {
-        return base < Date()
+        return value < Date()
     }
 
     /// ThenFoundation: Check if date is within today.
@@ -285,7 +285,7 @@ public extension ThenExtension where T == Date {
     ///     Date().then.isInToday -> true
     ///
     var isInToday: Bool {
-        return calendar.isDateInToday(base)
+        return calendar.isDateInToday(value)
     }
 
     /// ThenFoundation: Check if date is within yesterday.
@@ -293,7 +293,7 @@ public extension ThenExtension where T == Date {
     ///     Date().then.isInYesterday -> false
     ///
     var isInYesterday: Bool {
-        return calendar.isDateInYesterday(base)
+        return calendar.isDateInYesterday(value)
     }
 
     /// ThenFoundation: Check if date is within tomorrow.
@@ -301,32 +301,32 @@ public extension ThenExtension where T == Date {
     ///     Date().then.isInTomorrow -> false
     ///
     var isInTomorrow: Bool {
-        return calendar.isDateInTomorrow(base)
+        return calendar.isDateInTomorrow(value)
     }
 
     /// ThenFoundation: Check if date is within a weekend period.
     var isInWeekend: Bool {
-        return calendar.isDateInWeekend(base)
+        return calendar.isDateInWeekend(value)
     }
 
     /// ThenFoundation: Check if date is within a weekday period.
     var isWorkday: Bool {
-        return !calendar.isDateInWeekend(base)
+        return !calendar.isDateInWeekend(value)
     }
 
     /// ThenFoundation: Check if date is within the current week.
     var isInCurrentWeek: Bool {
-        return calendar.isDate(base, equalTo: Date(), toGranularity: .weekOfYear)
+        return calendar.isDate(value, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
     /// ThenFoundation: Check if date is within the current month.
     var isInCurrentMonth: Bool {
-        return calendar.isDate(base, equalTo: Date(), toGranularity: .month)
+        return calendar.isDate(value, equalTo: Date(), toGranularity: .month)
     }
 
     /// ThenFoundation: Check if date is within the current year.
     var isInCurrentYear: Bool {
-        return calendar.isDate(base, equalTo: Date(), toGranularity: .year)
+        return calendar.isDate(value, equalTo: Date(), toGranularity: .year)
     }
 
     /// ThenFoundation: ISO8601 string of format (yyyy-MM-dd'T'HH:mm:ss.SSS) from date.
@@ -340,7 +340,7 @@ public extension ThenExtension where T == Date {
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 
-        return dateFormatter.string(from: base).appending("Z")
+        return dateFormatter.string(from: value).appending("Z")
     }
 
     /// ThenFoundation: Nearest five minutes to date.
@@ -355,7 +355,7 @@ public extension ThenExtension where T == Date {
     var nearestFiveMinutes: Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
-            from: base)
+            from: value)
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
         components.second = 0
@@ -375,7 +375,7 @@ public extension ThenExtension where T == Date {
     var nearestTenMinutes: Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
-            from: base)
+            from: value)
         let min = components.minute!
         components.minute? = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
         components.second = 0
@@ -395,7 +395,7 @@ public extension ThenExtension where T == Date {
     var nearestQuarterHour: Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
-            from: base)
+            from: value)
         let min = components.minute!
         components.minute! = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
         components.second = 0
@@ -415,7 +415,7 @@ public extension ThenExtension where T == Date {
     var nearestHalfHour: Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
-            from: base)
+            from: value)
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
         components.second = 0
@@ -432,9 +432,9 @@ public extension ThenExtension where T == Date {
     ///     date.nearestHour // "7:00 PM"
     ///
     var nearestHour: Date {
-        let min = calendar.component(.minute, from: base)
+        let min = calendar.component(.minute, from: value)
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour]
-        let date = calendar.date(from: calendar.dateComponents(components, from: base))!
+        let date = calendar.date(from: calendar.dateComponents(components, from: value))!
 
         if min < 30 {
             return date
@@ -448,7 +448,7 @@ public extension ThenExtension where T == Date {
     ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
     ///
     var yesterday: Date {
-        return calendar.date(byAdding: .day, value: -1, to: base) ?? Date()
+        return calendar.date(byAdding: .day, value: -1, to: value) ?? Date()
     }
 
     /// ThenFoundation: Tomorrow's date.
@@ -457,7 +457,7 @@ public extension ThenExtension where T == Date {
     ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
     ///
     var tomorrow: Date {
-        return calendar.date(byAdding: .day, value: 1, to: base) ?? Date()
+        return calendar.date(byAdding: .day, value: 1, to: value) ?? Date()
     }
 
     /// ThenFoundation: UNIX timestamp from date.
@@ -465,13 +465,13 @@ public extension ThenExtension where T == Date {
     ///        Date().then.unixTimestamp -> 1484233862.826291
     ///
     var unixTimestamp: Double {
-        return base.timeIntervalSince1970
+        return value.timeIntervalSince1970
     }
     
     /// ThenFoundation: Today's last date
     /// last seconds:  23:59:59
     var lastSecondDate: Date? {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: base)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: value)
         components.hour = 23
         components.minute = 59
         components.second = 59
@@ -481,7 +481,7 @@ public extension ThenExtension where T == Date {
     /// ThenFoundation: Today's begin date
     /// begin seconds: 00:00:00
     var beginSecondDate: Date? {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: base)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: value)
         components.hour = 0
         components.minute = 0
         components.second = 0

@@ -11,15 +11,15 @@ public extension ThenExtension where T: NSLock {
     
     @discardableResult
     func lock<Element>(_ closure: () -> Element) -> Element {
-        base.lock()
-        defer { base.unlock() }
+        value.lock()
+        defer { value.unlock() }
         return closure()
     }
     
     @discardableResult
     func lock<Element>(_ closure: @autoclosure () -> Element) -> Element {
-        base.lock()
-        defer { base.unlock() }
+        value.lock()
+        defer { value.unlock() }
         return closure()
     }
 }

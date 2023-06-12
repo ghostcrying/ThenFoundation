@@ -11,22 +11,23 @@ import Foundation.NSObject
 @dynamicMemberLookup
 public struct ThenExtension<T> {
     
-    public var base: T
+    public var value: T
     
-    public init(_ base: T) {
-        self.base = base
+    public init(_ value: T) {
+        self.value = value
     }
     
     public subscript<Value>(
         dynamicMember keyPath: WritableKeyPath<T, Value>
     ) -> ((Value) -> ThenExtension<T>) {
-        var t = self.base
+        var t = self.value
         return { value in
             t[keyPath: keyPath] = value
             return ThenExtension(t)
         }
     }
     
+    /// May No Use
     public func dispose() { }
 }
 
@@ -36,7 +37,7 @@ public extension ThenExtension {
     func force(
         _ handler: (inout T) -> ()
     ) -> ThenExtension<T> {
-        var object = base
+        var object = value
         handler(&object)
         return self
     }
@@ -46,7 +47,7 @@ public extension ThenExtension {
         _ s: S,
         handler: (inout T, S) -> ()
     ) -> ThenExtension<T> {
-        var object = base
+        var object = value
         handler(&object, s)
         return self
     }
@@ -57,7 +58,7 @@ public extension ThenExtension {
         _ s2: S2,
         handler: (inout T, S1, S2) -> ()
     ) -> ThenExtension<T> {
-        var object = base
+        var object = value
         handler(&object, s1, s2)
         return self
     }
@@ -69,7 +70,7 @@ public extension ThenExtension {
         _ s3: S3,
         handler: (inout T, S1, S2, S3) -> ()
     ) -> ThenExtension<T> {
-        var object = base
+        var object = value
         handler(&object, s1, s2, s3)
         return self
     }
@@ -82,7 +83,7 @@ public extension ThenExtension {
         _ s4: S4,
         handler: (inout T, S1, S2, S3, S4) -> ()
     ) -> ThenExtension<T> {
-        var object = base
+        var object = value
         handler(&object, s1, s2, s3, s4)
         return self
     }

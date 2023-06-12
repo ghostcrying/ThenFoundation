@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9E525B7E29CAA6FD001AC37E /* ThenFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E525B7529CAA6FD001AC37E /* ThenFoundation.framework */; };
 		9E525B8329CAA6FD001AC37E /* ThenFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */; };
-		9E525BC929CAA7D3001AC37E /* ThenExtensionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B8F29CAA7D2001AC37E /* ThenExtensionBase.swift */; };
+		9E525BC929CAA7D3001AC37E /* ThenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B8F29CAA7D2001AC37E /* ThenExtension.swift */; };
 		9E525BCA29CAA7D3001AC37E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B9129CAA7D2001AC37E /* Reachability.swift */; };
 		9E525BCB29CAA7D3001AC37E /* StatisticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B9229CAA7D2001AC37E /* StatisticsProtocol.swift */; };
 		9E525BCC29CAA7D3001AC37E /* ThenResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B9429CAA7D2001AC37E /* ThenResource.swift */; };
@@ -75,7 +75,7 @@
 		9E525B7529CAA6FD001AC37E /* ThenFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThenFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E525B7D29CAA6FD001AC37E /* ThenFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThenFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThenFoundationTests.swift; sourceTree = "<group>"; };
-		9E525B8F29CAA7D2001AC37E /* ThenExtensionBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenExtensionBase.swift; sourceTree = "<group>"; };
+		9E525B8F29CAA7D2001AC37E /* ThenExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenExtension.swift; sourceTree = "<group>"; };
 		9E525B9129CAA7D2001AC37E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9E525B9229CAA7D2001AC37E /* StatisticsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsProtocol.swift; sourceTree = "<group>"; };
 		9E525B9429CAA7D2001AC37E /* ThenResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenResource.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		9E525B8E29CAA7D2001AC37E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9E525B8F29CAA7D2001AC37E /* ThenExtensionBase.swift */,
+				9E525B8F29CAA7D2001AC37E /* ThenExtension.swift */,
 				9E525B9029CAA7D2001AC37E /* Other */,
 				9E525B9329CAA7D2001AC37E /* Utils */,
 			);
@@ -470,7 +470,7 @@
 				9E525BF229CAA7D3001AC37E /* Seconds.swift in Sources */,
 				9E525BCF29CAA7D3001AC37E /* KeychainSwift.swift in Sources */,
 				9E525BED29CAA7D3001AC37E /* Crypto+String.swift in Sources */,
-				9E525BC929CAA7D3001AC37E /* ThenExtensionBase.swift in Sources */,
+				9E525BC929CAA7D3001AC37E /* ThenExtension.swift in Sources */,
 				9E525BE829CAA7D3001AC37E /* NSObject+Associate.swift in Sources */,
 				9E525BE529CAA7D3001AC37E /* Array++.swift in Sources */,
 				9E525BD029CAA7D3001AC37E /* TegKeychainConstants.swift in Sources */,

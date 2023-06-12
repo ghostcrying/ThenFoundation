@@ -21,7 +21,7 @@ public extension ThenExtension where T == Reachability {
     
     /// 网络环境
     var network: String {
-        switch base.currentReachabilityStatus {
+        switch value.currentReachabilityStatus {
         case .notReachable:
             return "none"
         case .reachableViaWiFi:

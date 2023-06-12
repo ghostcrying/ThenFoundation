@@ -17,31 +17,31 @@ public extension ThenExtension where T: NSObject {
     
     /// associated object
     var tag: Int {
-        get { return base.then.binded(for: &ThenObjectAssociateKeys.tag) ?? 0 }
-        set { base.then.bind(object: newValue, for: &ThenObjectAssociateKeys.tag, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
+        get { return value.then.binded(for: &ThenObjectAssociateKeys.tag) ?? 0 }
+        set { value.then.bind(object: newValue, for: &ThenObjectAssociateKeys.tag, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
     }
     
     /// associated object
     var info: [AnyHashable: Any] {
-        get { return base.then.binded(for: &ThenObjectAssociateKeys.info) ?? [:] }
-        set { base.then.bind(object: newValue, for: &ThenObjectAssociateKeys.info, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
+        get { return value.then.binded(for: &ThenObjectAssociateKeys.info) ?? [:] }
+        set { value.then.bind(object: newValue, for: &ThenObjectAssociateKeys.info, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
     }
 }
 
 public extension ThenExtension where T: NSObject {
     
-    /// objc_getAssociatedObject(base, key)
+    /// objc_getAssociatedObject(value, key)
     func binded<ResultType>(for key: UnsafeRawPointer) -> ResultType? {
-        return objc_getAssociatedObject(base, key) as? ResultType
+        return objc_getAssociatedObject(value, key) as? ResultType
     }
     
-    /// objc_setAssociatedObject(base, key, object, policy)
+    /// objc_setAssociatedObject(value, key, object, policy)
     func bind(object: Any?, for key: UnsafeRawPointer, _ policy: objc_AssociationPolicy) {
-        objc_setAssociatedObject(base, key, object, policy)
+        objc_setAssociatedObject(value, key, object, policy)
     }
     
-    /// objc_setAssociatedObject(base, key, nil, policy)
+    /// objc_setAssociatedObject(value, key, nil, policy)
     func unBind(for key: UnsafeRawPointer, _ policy: objc_AssociationPolicy) {
-        objc_setAssociatedObject(base, key, nil, policy)
+        objc_setAssociatedObject(value, key, nil, policy)
     }
 }

@@ -10,35 +10,35 @@ import UIKit
 public extension ThenExtension where T: NSObject {
     
     var lastKeyboard: ThenKeyBoard? {
-        return base.kit_last_keyboard
+        return value.kit_last_keyboard
     }
     
     @discardableResult
     func addKeyboard(notification name: ThenKeyBoard.Name, _ closure: @escaping ThenKeyBoard.Closure) -> ThenExtension {
-        base.then.addNotification(name: name.notificationName, object: nil) { [weak base] notification in
+        value.then.addNotification(name: name.notificationName, object: nil) { [weak value] notification in
             let info = ThenKeyBoard.Info(notification)
             closure(name, info)
-            base?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
+            value?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
         }
         return self
     }
     
     @discardableResult
     func addKeyboard(notification name: ThenKeyBoard.Name, _ closure: @escaping (ThenKeyBoard.Info) -> Void) -> ThenExtension {
-        base.then.addNotification(name: name.notificationName, object: nil) { [weak base] notification in
+        value.then.addNotification(name: name.notificationName, object: nil) { [weak value] notification in
             let info = ThenKeyBoard.Info(notification)
             closure(info)
-            base?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
+            value?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
         }
         return self
     }
     
     @discardableResult
     func addKeyboard(notification name: ThenKeyBoard.Name, _ closure: @escaping () -> Void) -> ThenExtension {
-        base.then.addNotification(name: name.notificationName, object: nil) { [weak base] notification in
+        value.then.addNotification(name: name.notificationName, object: nil) { [weak value] notification in
             let info = ThenKeyBoard.Info(notification)
             closure()
-            base?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
+            value?.kit_last_keyboard = ThenKeyBoard(name: name, info: info)
         }
         return self
     }
@@ -63,20 +63,20 @@ public extension ThenExtension where T: NSObject {
     
     @discardableResult
     func removeKeyboard() -> ThenExtension {
-        let temp = base.then
+        let temp = value.then
         ThenKeyBoard.Name.allCases.forEach { temp.removeNotification(name: $0.notificationName) }
         return self
     }
     
     @discardableResult
     func removeKeyboard(notification type: ThenKeyBoard.Name) -> ThenExtension {
-        base.then.removeNotification(name: type.notificationName)
+        value.then.removeNotification(name: type.notificationName)
         return self
     }
     
     @discardableResult
     func removeKeyboard(notification types: [ThenKeyBoard.Name]) -> ThenExtension {
-        let temp = base.then
+        let temp = value.then
         types.forEach { temp.removeNotification(name: $0.notificationName) }
         return self
     }

@@ -14,12 +14,12 @@ public extension ThenExtension where T: DictionarySignProtocol {
     /// 将keyValues中value不为nil的元素添加到当前[key:value]中，更新已有的值
     @discardableResult
     mutating func append(_ keyValues: [T.Key:T.Value?]?) -> [T.Key:T.Value] {
-        return base.append(keyValues)
+        return value.append(keyValues)
     }
     
     /// 签名，具体方式请查看源码
     func sign(with secret: String) -> String {
-        return base.sign(with: secret)
+        return value.sign(with: secret)
     }
 }
 

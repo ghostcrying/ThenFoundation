@@ -37,25 +37,25 @@ extension CGPoint: ThenExtensionCompatible { }
 public extension ThenExtension where T == CGPoint {
     
     /// CGPoint(x: x.ceil, y: y.ceil)
-    var ceil: T { return CGPoint(x: base.x.then.ceil, y: base.y.then.ceil) }
+    var ceil: T { return CGPoint(x: value.x.then.ceil, y: value.y.then.ceil) }
     
     /// CGPoint(x: x.floor, y: y.floor)
-    var floor: T { return CGPoint(x: base.x.then.floor, y: base.y.then.floor) }
+    var floor: T { return CGPoint(x: value.x.then.floor, y: value.y.then.floor) }
     
     /// CGPoint(x: x.round, y: y.round)
-    var round: T { return CGPoint(x: base.x.then.round, y: base.y.then.round) }
+    var round: T { return CGPoint(x: value.x.then.round, y: value.y.then.round) }
 }
 
 public extension ThenExtension where T == CGPoint {
     
     /// distance
     func distance(to point: T) -> CGFloat {
-        return CGFloat(sqrt((point.x - base.x) * (point.x - base.x) + (point.y - base.y) * (point.y - base.y)))
+        return CGFloat(sqrt((point.x - value.x) * (point.x - value.x) + (point.y - value.y) * (point.y - value.y)))
     }
     
     /// atan((self.x - point.x) / (self.y - point.y))
     func angle(by point: T) -> CGFloat {
-        return atan((base.x - point.x) / (base.y - point.y))
+        return atan((value.x - point.x) / (value.y - point.y))
     }
     
     /// the distance of point to line
@@ -71,10 +71,10 @@ public extension ThenExtension where T == CGPoint {
         let b = start.x - ended.x
         let c = ended.x * start.y - start.x * ended.y
         
-        let x = (+b * b * base.x - a * b * base.y - a * c) / (a * a + b * b)
-        let y = (-a * b * base.x + a * a * base.y - b * c) / (a * a + b * b)
+        let x = (+b * b * value.x - a * b * value.y - a * c) / (a * a + b * b)
+        let y = (-a * b * value.x + a * a * value.y - b * c) / (a * a + b * b)
         
-        let distance = abs((a * base.x + b * base.y + c)) / sqrt(a * a + b * b)
+        let distance = abs((a * value.x + b * value.y + c)) / sqrt(a * a + b * b)
         let point = CGPoint(x: x, y: y)
         //
         return (distance, point)
@@ -84,24 +84,24 @@ public extension ThenExtension where T == CGPoint {
 public extension ThenExtension where T == CGPoint {
     
     func scale(_ scale: CGFloat) -> T {
-        return base * scale
+        return value * scale
     }
 }
 
 public extension ThenExtension where T == Array<CGPoint> {
     
     func scale(_ scale: CGFloat) -> [T.Element] {
-        return base.compactMap { $0 * scale }
+        return value.compactMap { $0 * scale }
     }
     
     /// total distance for every two point
     func lineTotalDistance() -> CGFloat {
-        guard base.count > 1 else {
+        guard value.count > 1 else {
             return 0
         }
         var distance: CGFloat = 0
-        for i in 1..<base.count {
-            distance += base[i].then.distance(to: base[i-1])
+        for i in 1..<value.count {
+            distance += value[i].then.distance(to: value[i-1])
         }
         return distance
     }

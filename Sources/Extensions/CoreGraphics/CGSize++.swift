@@ -20,34 +20,34 @@ extension CGSize: ThenExtensionCompatible { }
 public extension ThenExtension where T == CGSize {
     
     /// CGSize(width: width.ceil, height: height.ceil)
-    var ceil: T { return CGSize(width: base.width.then.ceil, height: base.height.then.ceil) }
+    var ceil: T { return CGSize(width: value.width.then.ceil, height: value.height.then.ceil) }
     
     /// CGSize(width: width.floor, height: height.floor)
-    var floor: T { return CGSize(width: base.width.then.floor, height: base.height.then.floor) }
+    var floor: T { return CGSize(width: value.width.then.floor, height: value.height.then.floor) }
     
     /// CGSize(width: width.round, height: height.round)
-    var round: T { return CGSize(width: base.width.then.round, height: base.height.then.round) }
+    var round: T { return CGSize(width: value.width.then.round, height: value.height.then.round) }
     
     /// CGRect(x: 0, y: 0, width: width, height: height)
-    var bounds: CGRect { return CGRect(width: base.width, height: base.height) }
+    var bounds: CGRect { return CGRect(width: value.width, height: value.height) }
 }
 
 public extension ThenExtension where T == CGSize {
         
     /// CGSize(width: self.width * scale, height: self.height * scale)
     func scale(_ scale: CGFloat) -> T {
-        return base * scale
+        return value * scale
     }
     
     /// CGSize(width: self.width * widthScale, height: self.height * heightScale)
     func scale(_ widthScale: CGFloat, _ heightScale: CGFloat) -> T {
-        return CGSize(width: base.width * widthScale, height: base.height * heightScale)
+        return CGSize(width: value.width * widthScale, height: value.height * heightScale)
     }
 }
 
 public extension ThenExtension where T == Array<CGSize> {
     
     func scale(_ scale: CGFloat) -> [T.Element] {
-        return base.compactMap { $0 * scale }
+        return value.compactMap { $0 * scale }
     }
 }

@@ -166,7 +166,7 @@ public extension ThenExtension where T == FileManager {
     
     var systemDiskSize: Int64 {
         do {
-            let attributes = try base.attributesOfFileSystem(forPath: libraryDirectoryPath.asFilePath())
+            let attributes = try value.attributesOfFileSystem(forPath: libraryDirectoryPath.asFilePath())
             return (attributes[.systemSize] as? Int64) ?? 0
         } catch {
             return 0
@@ -175,7 +175,7 @@ public extension ThenExtension where T == FileManager {
     
     var systemFreeDiskSize: Int64 {
         do {
-            let attributes = try base.attributesOfFileSystem(forPath: libraryDirectoryPath.asFilePath())
+            let attributes = try value.attributesOfFileSystem(forPath: libraryDirectoryPath.asFilePath())
             return (attributes[.systemFreeSize] as? Int64) ?? 0
         } catch {
             return 0
@@ -183,45 +183,45 @@ public extension ThenExtension where T == FileManager {
     }
     
     func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [FilePathCovertible] {
-        return base.urls(for: directory, in: domainMask)
+        return value.urls(for: directory, in: domainMask)
     }
     
     func attributesOfItem(at path: FilePathCovertible) -> [FileAttributeKey : Any]? {
         guard path.isExists else { return nil }
         do {
-            return try base.attributesOfItem(atPath: path.asFilePath())
+            return try value.attributesOfItem(atPath: path.asFilePath())
         } catch {
             return nil
         }
     }
     
     func itemExists(at filePath: FilePathCovertible) -> Bool {
-        return base.fileExists(atPath: filePath.asFilePath())
+        return value.fileExists(atPath: filePath.asFilePath())
     }
     
     func directoryExists(at filePath: FilePathCovertible) -> Bool {
         var isDirectory = ObjCBool(false)
-        let isExists = base.fileExists(atPath: filePath.asFilePath(), isDirectory: &isDirectory)
+        let isExists = value.fileExists(atPath: filePath.asFilePath(), isDirectory: &isDirectory)
         return isDirectory.boolValue && isExists
     }
     
     func fileExists(at filePath: FilePathCovertible) -> Bool {
         var isDirectory = ObjCBool(false)
-        let isExists = base.fileExists(atPath: filePath.asFilePath(), isDirectory: &isDirectory)
+        let isExists = value.fileExists(atPath: filePath.asFilePath(), isDirectory: &isDirectory)
         return !isDirectory.boolValue && isExists
     }
 
     /// 根据文件夹路径创建文件夹
     func createDirectory(at directory: FilePathCovertible) throws {
         if directoryExists(at: directory) { return }
-        try base.createDirectory(at: directory.asFileURL(), withIntermediateDirectories: true)
+        try value.createDirectory(at: directory.asFileURL(), withIntermediateDirectories: true)
     }
     
     @discardableResult
     func createFile(at filePath: FilePathCovertible) throws -> Bool {
         if fileExists(at: filePath) { return true }
         try filePath.directoryPath.createDirectory()
-        return base.createFile(atPath: filePath.asFilePath(), contents: nil, attributes: nil)
+        return value.createFile(atPath: filePath.asFilePath(), contents: nil, attributes: nil)
     }
     
     
@@ -233,29 +233,29 @@ public extension ThenExtension where T == FileManager {
     func allFilePaths(at directory: FilePathCovertible, searchSub: Bool = false, options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles]) throws -> [FilePathCovertible]? {
         guard directoryExists(at: directory) else { return nil }
         if searchSub {
-            let enumerator = base.enumerator(at: directory.asFileURL(), includingPropertiesForKeys: nil, options: options, errorHandler: nil)
+            let enumerator = value.enumerator(at: directory.asFileURL(), includingPropertiesForKeys: nil, options: options, errorHandler: nil)
             return enumerator?.allObjects as? [URL]
         } else {
-            return try base.contentsOfDirectory(at: directory.asFileURL(), includingPropertiesForKeys: nil, options: options)
+            return try value.contentsOfDirectory(at: directory.asFileURL(), includingPropertiesForKeys: nil, options: options)
         }
     }
     
     func moveItem(from: FilePathCovertible, to: FilePathCovertible) throws {
         guard from.isExists else { return }
         try createDirectory(at: to.directoryPath)
-        try base.moveItem(at: from.asFileURL(), to: to.asFileURL())
+        try value.moveItem(at: from.asFileURL(), to: to.asFileURL())
     }
     
     func copyItem(from: FilePathCovertible, to: FilePathCovertible) throws {
         guard from.isExists else { return }
         try createDirectory(at: to.directoryPath)
-        try base.copyItem(at: from.asFileURL(), to: to.asFileURL())
+        try value.copyItem(at: from.asFileURL(), to: to.asFileURL())
     }
 
     /// 根据路径删除文件/文件夹
     func removeItem(at filePath: FilePathCovertible) throws {
         guard filePath.isExists else { return }
-        try base.removeItem(at: filePath.asFileURL())
+        try value.removeItem(at: filePath.asFileURL())
     }
     
     func attributeOfItem(at path: FilePathCovertible, key: FileAttributeKey) -> Any? {
