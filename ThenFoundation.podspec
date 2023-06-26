@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ThenFoundation'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'The Basic Foundation Framework'
 
 # This description is used to generate tags and improve search results.
@@ -26,12 +26,11 @@ TODO: Add long description of the pod here.
   s.author           = { 'ghost' => 'czios1501@gmail.com' }
   s.source           = { :git => 'https://github.com/ghostcrying/ThenFoundation.git', :tag => s.version.to_s }
   
-  s.platform     = :iOS
   s.platform     = :ios, "11.0"
   s.swift_version = "5.0"
 
-  s.source_files = 'Sources/**/*.{swift,h,m}', 'Sources/ThenFoundation.h'
-  
+  s.source_files = 'Sources/**/*.{swift,h,m}', 'Sources/*.h'
+  s.public_header_files = 'Sources/*.h'
   s.frameworks = 'Foundation'
 end
 
