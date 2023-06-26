@@ -72,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E48C8A32A493954005C260D /* ThenFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThenFoundation.podspec; sourceTree = "<group>"; };
 		9E525B7529CAA6FD001AC37E /* ThenFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThenFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E525B7D29CAA6FD001AC37E /* ThenFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThenFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThenFoundationTests.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		9E525B6B29CAA6FD001AC37E = {
 			isa = PBXGroup;
 			children = (
+				9E48C8A32A493954005C260D /* ThenFoundation.podspec */,
 				9E525B8D29CAA7D2001AC37E /* Sources */,
 				9E525B8129CAA6FD001AC37E /* ThenFoundationTests */,
 				9E525B7629CAA6FD001AC37E /* Products */,
