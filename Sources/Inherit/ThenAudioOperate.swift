@@ -1,5 +1,5 @@
 //
-//  AudioOperater.swift
+//  ThenAudioOperate.swift
 //  ThenFoundation
 //
 //  Created by ghost on 2023/3/21.
@@ -9,7 +9,7 @@ import Foundation
 import CoreAudio
 import AVFoundation
 
-public struct AudioOperate {
+public struct ThenAudioOperate {
     
     /// 切割大型音频文件
     /// chunkDuration: 1~60, 默认60s切分

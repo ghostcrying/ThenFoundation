@@ -11,6 +11,7 @@ public extension NSError {
     
     static let NormalErrorDomain = "com.then.domain"
     
+    @inlinable
     convenience init(domain: String = NormalErrorDomain, code: Int = -1, description: String? = nil) {
         if let desc = description {
             self.init(domain: domain, code: code, userInfo: ["statusCode": code, NSLocalizedDescriptionKey: desc])

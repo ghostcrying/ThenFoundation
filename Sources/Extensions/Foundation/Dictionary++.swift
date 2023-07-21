@@ -12,6 +12,7 @@ extension Dictionary: ThenExtensionCompatible { }
 public extension ThenExtension where T: DictionarySignProtocol {
     
     /// 将keyValues中value不为nil的元素添加到当前[key:value]中，更新已有的值
+    @inlinable
     @discardableResult
     mutating func append(_ keyValues: [T.Key:T.Value?]?) -> [T.Key:T.Value] {
         return value.append(keyValues)
@@ -36,6 +37,7 @@ public protocol DictionarySignProtocol where Key: Hashable {
 extension Dictionary: DictionarySignProtocol {
     
     /// 将keyValues中value不为nil的元素添加到当前[key:value]中，更新已有的值
+    @inlinable
     @discardableResult
     public mutating func append(_ keyValues: [Key:Value?]?) -> [Key:Value] {
         keyValues?.forEach {

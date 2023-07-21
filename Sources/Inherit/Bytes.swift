@@ -8,14 +8,33 @@
 import Foundation
 import CoreGraphics
 
-public let KB_P:    ThenBytes = ThenBytes(1024)
-public let MB_P:    ThenBytes = 1024 * KB_P
-public let GB_P:    ThenBytes = 1024 * MB_P
-public let TB_P:    ThenBytes = 1024 * GB_P
-
-public func MB_P(_ multiplie: UInt64) ->   ThenBytes { return MB_P * multiplie }
-public func GB_P(_ multiplie: UInt64) ->   ThenBytes { return GB_P * multiplie }
-public func TB_P(_ multiplie: UInt64) ->   ThenBytes { return TB_P * multiplie }
+public extension ThenBytes {
+    
+    static let KB = ThenBytes(1024)
+    static let MB = 1024 * KB
+    static let GB = 1024 * MB
+    static let TB = 1024 * GB
+    
+    @inlinable
+    static func KB(_ multiplie: UInt64) -> ThenBytes {
+        KB * multiplie
+    }
+    
+    @inlinable
+    static func MB(_ multiplie: UInt64) -> ThenBytes {
+        MB * multiplie
+    }
+    
+    @inlinable
+    static func GB(_ multiplie: UInt64) -> ThenBytes {
+        GB * multiplie
+    }
+    
+    @inlinable
+    static func TB(_ multiplie: UInt64) -> ThenBytes {
+        TB * multiplie
+    }
+}
 
 public struct ThenBytes {
     
@@ -29,7 +48,7 @@ public struct ThenBytes {
 extension ThenBytes: CustomStringConvertible {
     
     public var description: String {
-        let cb = [(TB_P, "T"), (GB_P, "G"), (MB_P, "M"), (KB_P, "K")]
+        let cb = [(ThenBytes.TB, "T"), (ThenBytes.GB, "G"), (ThenBytes.MB, "M"), (ThenBytes.KB, "K")]
         guard let c = cb.filter({ $0.0.bytes <= bytes }).first else {
             return "\(bytes)B"
         }
@@ -123,15 +142,15 @@ public extension ThenBytes {
 
 public extension ThenBytes {
     
-    var tb: UInt64 { return bytes / TB_P.bytes }
+    var tb: UInt64 { return bytes / ThenBytes.TB.bytes }
     
-    var gb: UInt64 { return (bytes % TB_P.bytes) / GB_P.bytes }
+    var gb: UInt64 { return (bytes % ThenBytes.TB.bytes) / ThenBytes.GB.bytes }
     
-    var mb: UInt64 { return (bytes % GB_P.bytes) / MB_P.bytes }
+    var mb: UInt64 { return (bytes % ThenBytes.GB.bytes) / ThenBytes.MB.bytes }
     
-    var kb: UInt64 { return (bytes % MB_P.bytes) / KB_P.bytes }
+    var kb: UInt64 { return (bytes % ThenBytes.MB.bytes) / ThenBytes.KB.bytes }
     
-    var bt: UInt64 { return bytes % KB_P.bytes }
+    var bt: UInt64 { return (bytes % ThenBytes.KB.bytes) }
 }
 
 public extension UInt64 {

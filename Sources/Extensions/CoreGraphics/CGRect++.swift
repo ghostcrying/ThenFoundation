@@ -12,10 +12,12 @@ extension CGRect: ThenExtensionCompatible { }
 
 extension CGRect {
     
+    @inlinable
     public init(width: CGFloat, height: CGFloat) {
         self.init(x: 0, y: 0, width: width, height: height)
     }
     
+    @inlinable
     public init(center: CGPoint, size: CGSize) {
         self.init(origin: CGPoint(x: center.x - size.width * 0.5, y: center.y - size.height * 0.5), size: size)
     }

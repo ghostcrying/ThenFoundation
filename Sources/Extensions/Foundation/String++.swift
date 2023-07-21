@@ -287,6 +287,7 @@ public extension String {
     ///      "Hello World!"[safe: 20] -> nil
     ///
     /// - Parameter index: index.
+    @inlinable
     subscript(safe index: Int) -> Character? {
         guard index >= 0, index < count else { return nil }
         return self[self.index(startIndex, offsetBy: index)]
@@ -301,6 +302,7 @@ public extension String {
     ///      "Hello World!"[safe: 21...110] -> nil
     ///
     /// - Parameter range: Range expression.
+    @inlinable
     subscript<R>(safe range: R) -> String? where R: RangeExpression, R.Bound == Int {
         let range = range.relative(to: Int.min..<Int.max)
         guard range.lowerBound >= 0,

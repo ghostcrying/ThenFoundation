@@ -49,16 +49,17 @@
 		9E525BEE29CAA7D3001AC37E /* Crypto+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BBD29CAA7D2001AC37E /* Crypto+Data.swift */; };
 		9E525BEF29CAA7D3001AC37E /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BBF29CAA7D2001AC37E /* NSObject+Swizzle.m */; };
 		9E525BF029CAA7D3001AC37E /* NSObject+Swizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E525BC029CAA7D2001AC37E /* NSObject+Swizzle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9E525BF129CAA7D3001AC37E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC229CAA7D2001AC37E /* AudioPlayer.swift */; };
+		9E525BF129CAA7D3001AC37E /* ThenAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC229CAA7D2001AC37E /* ThenAudioPlayer.swift */; };
 		9E525BF229CAA7D3001AC37E /* Seconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC329CAA7D2001AC37E /* Seconds.swift */; };
 		9E525BF329CAA7D3001AC37E /* SecondScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC429CAA7D2001AC37E /* SecondScheduler.swift */; };
-		9E525BF429CAA7D3001AC37E /* AudioOperater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC529CAA7D2001AC37E /* AudioOperater.swift */; };
-		9E525BF529CAA7D3001AC37E /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC629CAA7D2001AC37E /* AudioRecorder.swift */; };
+		9E525BF429CAA7D3001AC37E /* ThenAudioOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC529CAA7D2001AC37E /* ThenAudioOperate.swift */; };
+		9E525BF529CAA7D3001AC37E /* ThenAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC629CAA7D2001AC37E /* ThenAudioRecorder.swift */; };
 		9E525BF629CAA7D3001AC37E /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525BC729CAA7D2001AC37E /* Bytes.swift */; };
 		9E525BF729CAA7D3001AC37E /* ThenFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E525BC829CAA7D2001AC37E /* ThenFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E5B3A4629E7E0CD00D24E0E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B3A4529E7E0CD00D24E0E /* URL++.swift */; };
 		9E5B3A4929E7E12400D24E0E /* AVAudioPCMBuffer++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B3A4829E7E12400D24E0E /* AVAudioPCMBuffer++.swift */; };
 		9E5B3A4B29E7E23800D24E0E /* AVAudioSession++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B3A4A29E7E23800D24E0E /* AVAudioSession++.swift */; };
+		9E7BEE562A6A812C00FFF8E0 /* ThenTextPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7BEE552A6A812C00FFF8E0 /* ThenTextPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,16 +117,17 @@
 		9E525BBD29CAA7D2001AC37E /* Crypto+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Crypto+Data.swift"; sourceTree = "<group>"; };
 		9E525BBF29CAA7D2001AC37E /* NSObject+Swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzle.m"; sourceTree = "<group>"; };
 		9E525BC029CAA7D2001AC37E /* NSObject+Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzle.h"; sourceTree = "<group>"; };
-		9E525BC229CAA7D2001AC37E /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		9E525BC229CAA7D2001AC37E /* ThenAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenAudioPlayer.swift; sourceTree = "<group>"; };
 		9E525BC329CAA7D2001AC37E /* Seconds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seconds.swift; sourceTree = "<group>"; };
 		9E525BC429CAA7D2001AC37E /* SecondScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondScheduler.swift; sourceTree = "<group>"; };
-		9E525BC529CAA7D2001AC37E /* AudioOperater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioOperater.swift; sourceTree = "<group>"; };
-		9E525BC629CAA7D2001AC37E /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		9E525BC529CAA7D2001AC37E /* ThenAudioOperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenAudioOperate.swift; sourceTree = "<group>"; };
+		9E525BC629CAA7D2001AC37E /* ThenAudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenAudioRecorder.swift; sourceTree = "<group>"; };
 		9E525BC729CAA7D2001AC37E /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		9E525BC829CAA7D2001AC37E /* ThenFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThenFoundation.h; sourceTree = "<group>"; };
 		9E5B3A4529E7E0CD00D24E0E /* URL++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL++.swift"; sourceTree = "<group>"; };
 		9E5B3A4829E7E12400D24E0E /* AVAudioPCMBuffer++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPCMBuffer++.swift"; sourceTree = "<group>"; };
 		9E5B3A4A29E7E23800D24E0E /* AVAudioSession++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioSession++.swift"; sourceTree = "<group>"; };
+		9E7BEE552A6A812C00FFF8E0 /* ThenTextPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThenTextPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,9 +318,10 @@
 		9E525BC129CAA7D2001AC37E /* Inherit */ = {
 			isa = PBXGroup;
 			children = (
-				9E525BC229CAA7D2001AC37E /* AudioPlayer.swift */,
-				9E525BC529CAA7D2001AC37E /* AudioOperater.swift */,
-				9E525BC629CAA7D2001AC37E /* AudioRecorder.swift */,
+				9E7BEE552A6A812C00FFF8E0 /* ThenTextPlayer.swift */,
+				9E525BC229CAA7D2001AC37E /* ThenAudioPlayer.swift */,
+				9E525BC529CAA7D2001AC37E /* ThenAudioOperate.swift */,
+				9E525BC629CAA7D2001AC37E /* ThenAudioRecorder.swift */,
 				9E525BC729CAA7D2001AC37E /* Bytes.swift */,
 				9E525BC329CAA7D2001AC37E /* Seconds.swift */,
 				9E525BC429CAA7D2001AC37E /* SecondScheduler.swift */,
@@ -450,12 +453,13 @@
 				9E525BE129CAA7D3001AC37E /* NSPredicate++.swift in Sources */,
 				9E525BCC29CAA7D3001AC37E /* ThenResource.swift in Sources */,
 				9E5B3A4B29E7E23800D24E0E /* AVAudioSession++.swift in Sources */,
+				9E7BEE562A6A812C00FFF8E0 /* ThenTextPlayer.swift in Sources */,
 				9E525BCB29CAA7D3001AC37E /* StatisticsProtocol.swift in Sources */,
 				9E525BD729CAA7D3001AC37E /* CGPoint++.swift in Sources */,
 				9E525BEA29CAA7D3001AC37E /* NSObject+Notification.swift in Sources */,
 				9E525BF629CAA7D3001AC37E /* Bytes.swift in Sources */,
 				9E525BEC29CAA7D3001AC37E /* NSError++.swift in Sources */,
-				9E525BF429CAA7D3001AC37E /* AudioOperater.swift in Sources */,
+				9E525BF429CAA7D3001AC37E /* ThenAudioOperate.swift in Sources */,
 				9E525BDE29CAA7D3001AC37E /* Data++.swift in Sources */,
 				9E525BE629CAA7D3001AC37E /* Bundle++.swift in Sources */,
 				9E525BD629CAA7D3001AC37E /* CGRect++.swift in Sources */,
@@ -478,7 +482,7 @@
 				9E525BD029CAA7D3001AC37E /* TegKeychainConstants.swift in Sources */,
 				9E525BE729CAA7D3001AC37E /* Date++.swift in Sources */,
 				9E525BE929CAA7D3001AC37E /* NSObject++.swift in Sources */,
-				9E525BF129CAA7D3001AC37E /* AudioPlayer.swift in Sources */,
+				9E525BF129CAA7D3001AC37E /* ThenAudioPlayer.swift in Sources */,
 				9E5B3A4929E7E12400D24E0E /* AVAudioPCMBuffer++.swift in Sources */,
 				9E525BEF29CAA7D3001AC37E /* NSObject+Swizzle.m in Sources */,
 				9E525BE029CAA7D3001AC37E /* Dispatch++.swift in Sources */,
@@ -487,7 +491,7 @@
 				9E525BCE29CAA7D3001AC37E /* ThenConstrant.swift in Sources */,
 				9E525BE329CAA7D3001AC37E /* Dictionary++.swift in Sources */,
 				9E525BDA29CAA7D3001AC37E /* Double++.swift in Sources */,
-				9E525BF529CAA7D3001AC37E /* AudioRecorder.swift in Sources */,
+				9E525BF529CAA7D3001AC37E /* ThenAudioRecorder.swift in Sources */,
 				9E525BEB29CAA7D3001AC37E /* NSNumber++.swift in Sources */,
 				9E525BE229CAA7D3001AC37E /* FileManager++.swift in Sources */,
 				9E525BE429CAA7D3001AC37E /* NSLock++.swift in Sources */,

@@ -13,10 +13,12 @@ public struct ThenExtension<T> {
     
     public var value: T
     
+    @inlinable
     public init(_ value: T) {
         self.value = value
     }
     
+    @inlinable
     public subscript<Value>(
         dynamicMember keyPath: WritableKeyPath<T, Value>
     ) -> ((Value) -> ThenExtension<T>) {
@@ -28,11 +30,13 @@ public struct ThenExtension<T> {
     }
     
     /// May No Use
+    @inlinable
     public func dispose() { }
 }
 
 public extension ThenExtension {
     
+    @inlinable
     @discardableResult
     func force(
         _ handler: (inout T) -> ()
@@ -42,6 +46,7 @@ public extension ThenExtension {
         return self
     }
 
+    @inlinable
     @discardableResult
     func force<S>(
         _ s: S,
@@ -52,6 +57,7 @@ public extension ThenExtension {
         return self
     }
     
+    @inlinable
     @discardableResult
     func force<S1, S2>(
         _ s1: S1,
@@ -63,6 +69,7 @@ public extension ThenExtension {
         return self
     }
     
+    @inlinable
     @discardableResult
     func force<S1, S2, S3>(
         _ s1: S1,
@@ -75,6 +82,7 @@ public extension ThenExtension {
         return self
     }
 
+    @inlinable
     @discardableResult
     func force<S1, S2, S3, S4>(
         _ s1: S1,

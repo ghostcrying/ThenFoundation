@@ -31,16 +31,19 @@ public extension ThenExtension where T: NSObject {
 public extension ThenExtension where T: NSObject {
     
     /// objc_getAssociatedObject(value, key)
+    @inlinable
     func binded<ResultType>(for key: UnsafeRawPointer) -> ResultType? {
         return objc_getAssociatedObject(value, key) as? ResultType
     }
     
     /// objc_setAssociatedObject(value, key, object, policy)
+    @inlinable
     func bind(object: Any?, for key: UnsafeRawPointer, _ policy: objc_AssociationPolicy) {
         objc_setAssociatedObject(value, key, object, policy)
     }
     
     /// objc_setAssociatedObject(value, key, nil, policy)
+    @inlinable
     func unBind(for key: UnsafeRawPointer, _ policy: objc_AssociationPolicy) {
         objc_setAssociatedObject(value, key, nil, policy)
     }

@@ -1,5 +1,5 @@
 //
-//  AudioRecorder.swift
+//  ThenAudioRecorder.swift
 //  
 //
 //  Created by ghost on 2023/3/21.
@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 // MARK: 音频录制类型
-public protocol AudioRecorderType {
+public protocol ThenAudioRecorderType {
     
     @discardableResult
     func prepareToRecord() -> Bool
@@ -29,7 +29,7 @@ public protocol AudioRecorderType {
     
     @discardableResult
     func record(forDuration duration: TimeInterval) -> Bool
-        
+    
     
     @discardableResult
     func record(atTime time: TimeInterval, forDuration duration: TimeInterval) -> Bool
@@ -42,7 +42,7 @@ public protocol AudioRecorderType {
     
     /* URL of the recorded file */
     var url: URL? { get }
-
+    
     /* these settings are fully valid only when prepareToRecord has been called */
     var settings: [String : Any]? { get }
     
@@ -51,53 +51,49 @@ public protocol AudioRecorderType {
     
     /* get the current time of the recording - only valid while recording */
     var currentTime: TimeInterval? { get }
-
+    
     /* get the device current time - always valid */
     var deviceCurrentTime: TimeInterval? { get }
-
+    
 }
 
 
 // MARK: 音频录制回调协议
-public protocol AudioRecorderDelegate: NSObjectProtocol {
+public protocol ThenAudioRecorderDelegate: NSObjectProtocol {
     
-    func audioRecorderDidFinishRecording(_ recorder: AudioRecorderType, successfully flag: Bool)
+    func audioRecorderDidFinishRecording(_ recorder: ThenAudioRecorderType, successfully flag: Bool)
     
-    func audioRecorderEncodeErrorDidOccur(_ recorder: AudioRecorderType, error: Error?)
-    func audioRecorderBeginInterruption(_ recorder: AudioRecorderType)
-    func audioRecorderEndInterruption(_ recorder: AudioRecorderType, withOptions flags: Int)
+    func audioRecorderEncodeErrorDidOccur(_ recorder: ThenAudioRecorderType, error: Error?)
+    func audioRecorderBeginInterruption(_ recorder: ThenAudioRecorderType)
+    func audioRecorderEndInterruption(_ recorder: ThenAudioRecorderType, withOptions flags: Int)
     
-    func audioRecorderRouteChange(_ recorder: AudioRecorderType, reason: AVAudioSession.RouteChangeReason)
-    func audioRecorderInterruptionChange(_ recorder: AudioRecorderType,
-                                         type: AVAudioSession.InterruptionType,
-                                         options: AVAudioSession.InterruptionOptions)
+    func audioRecorderRouteChange(_ recorder: ThenAudioRecorderType, reason: AVAudioSession.RouteChangeReason)
+    func audioRecorderInterruptionChange(_ recorder: ThenAudioRecorderType, type: AVAudioSession.InterruptionType, options: AVAudioSession.InterruptionOptions)
 }
 
-extension AudioRecorderDelegate {
+extension ThenAudioRecorderDelegate {
     
-    func audioRecorderDidFinishRecording(_ recorder: AudioRecorderType, successfully flag: Bool) { }
+    func audioRecorderDidFinishRecording(_ recorder: ThenAudioRecorderType, successfully flag: Bool) { }
     
-    func audioRecorderEncodeErrorDidOccur(_ recorder: AudioRecorderType, error: Error?) { }
-    func audioRecorderBeginInterruption(_ recorder: AudioRecorderType) { }
-    func audioRecorderEndInterruption(_ recorder: AudioRecorderType, withOptions flags: Int) { }
+    func audioRecorderEncodeErrorDidOccur(_ recorder: ThenAudioRecorderType, error: Error?) { }
+    func audioRecorderBeginInterruption(_ recorder: ThenAudioRecorderType) { }
+    func audioRecorderEndInterruption(_ recorder: ThenAudioRecorderType, withOptions flags: Int) { }
     
-    func audioRecorderRouteChange(_ recorder: AudioRecorderType, reason: AVAudioSession.RouteChangeReason) { }
-    func audioRecorderInterruptionChange(_ recorder: AudioRecorderType,
-                                         type: AVAudioSession.InterruptionType,
-                                         options: AVAudioSession.InterruptionOptions) { }
+    func audioRecorderRouteChange(_ recorder: ThenAudioRecorderType, reason: AVAudioSession.RouteChangeReason) { }
+    func audioRecorderInterruptionChange(_ recorder: ThenAudioRecorderType, type: AVAudioSession.InterruptionType, options: AVAudioSession.InterruptionOptions) { }
 }
 
 
 // MARK: - 音频播放器的协议的默认空实现
-open class AudioRecorder: NSObject {
+open class ThenAudioRecorder: NSObject {
     
     open internal(set) var recorder: AVAudioRecorder?
     
-    open weak var delegate: AudioRecorderDelegate?
+    open weak var delegate: ThenAudioRecorderDelegate?
     
     
     //MARK: - Lifecycle
-    public init(url: URL, settings: [String : Any], delegate: AudioRecorderDelegate? = nil) {
+    public init(url: URL, settings: [String : Any], delegate: ThenAudioRecorderDelegate? = nil) {
         super.init()
         self.delegate = delegate
         do {
@@ -108,8 +104,8 @@ open class AudioRecorder: NSObject {
             delegate?.audioRecorderEncodeErrorDidOccur(self, error: error)
         }
     }
-
-    public init(url: URL, format: AVAudioFormat, delegate: AudioRecorderDelegate? = nil) {
+    
+    public init(url: URL, format: AVAudioFormat, delegate: ThenAudioRecorderDelegate? = nil) {
         super.init()
         self.delegate = delegate
         do {
@@ -120,7 +116,7 @@ open class AudioRecorder: NSObject {
             delegate?.audioRecorderEncodeErrorDidOccur(self, error: error)
         }
     }
-        
+    
     deinit {
         if recorder?.delegate != nil {
             recorder?.delegate = nil
@@ -147,8 +143,8 @@ open class AudioRecorder: NSObject {
                 let userInfo = $0.userInfo,
                 let type = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSession.InterruptionType,
                 let options = userInfo[AVAudioSessionInterruptionOptionKey] as? AVAudioSession.InterruptionOptions
-                else {
-                    return
+            else {
+                return
             }
             self?.audioRecorderInterruptionChange(type: type, options: options)
         }
@@ -157,8 +153,8 @@ open class AudioRecorder: NSObject {
             guard
                 let userInfo = $0.userInfo,
                 let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? AVAudioSession.RouteChangeReason
-                else {
-                    return
+            else {
+                return
             }
             self?.audioRecorderRouteChange(reason: reason)
         }
@@ -175,7 +171,7 @@ open class AudioRecorder: NSObject {
 
 
 //MARK: AudioRecorderType
-extension AudioRecorder: AudioRecorderType {
+extension ThenAudioRecorder: ThenAudioRecorderType {
     
     public var isRecording: Bool {
         return self.recorder?.isRecording == true
@@ -184,7 +180,7 @@ extension AudioRecorder: AudioRecorderType {
     public var url: URL? {
         return self.recorder?.url
     }
-
+    
     public var settings: [String : Any]? {
         return self.recorder?.settings
     }
@@ -196,7 +192,7 @@ extension AudioRecorder: AudioRecorderType {
     public var currentTime: TimeInterval? {
         return self.recorder?.currentTime
     }
-
+    
     public var deviceCurrentTime: TimeInterval? {
         return self.recorder?.deviceCurrentTime
     }
@@ -219,7 +215,7 @@ extension AudioRecorder: AudioRecorderType {
         self.recorder?.stop()
     }
     
-
+    
     @discardableResult
     public func record(atTime time: TimeInterval) -> Bool {
         return self.recorder?.record(atTime: time) == true
@@ -229,7 +225,7 @@ extension AudioRecorder: AudioRecorderType {
     public func record(forDuration duration: TimeInterval) -> Bool {
         return self.recorder?.record(forDuration: duration) == true
     }
-        
+    
     @discardableResult
     public func record(atTime time: TimeInterval, forDuration duration: TimeInterval) -> Bool {
         return self.recorder?.record(atTime: time, forDuration: duration) == true
@@ -243,7 +239,7 @@ extension AudioRecorder: AudioRecorderType {
 
 
 //MARK: AVAudioRecorderDelegate
-extension AudioRecorder: AVAudioRecorderDelegate {
+extension ThenAudioRecorder: AVAudioRecorderDelegate {
     
     open func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         self.delegate?.audioRecorderDidFinishRecording(self, successfully: flag)

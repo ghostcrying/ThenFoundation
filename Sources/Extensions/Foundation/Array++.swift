@@ -26,23 +26,23 @@ public extension ThenExtension where T: ArraySafeable {
         return value.randomAll()
     }
     
-    ///
+    @inlinable
     subscript (safe index: Int) -> T.Element? {
         get { return value[safe: index] }
         set { value[safe: index] = newValue }
     }
     
-    ///
+    @inlinable
     mutating func append(_ object: T.Element?) -> Array<T.Element> {
         return value.safeAppend(object)
     }
     
-    ///
+    @inlinable
     mutating func insert(_ object: T.Element?, at index: Int) -> Array<T.Element> {
         return value.safeInsert(object, at: index)
     }
     
-    ///
+    @inlinable
     mutating func remove(at index: Int) -> Array<T.Element> {
         return value.safeRemove(at: index)
     }
@@ -89,6 +89,7 @@ extension Array: ArraySafeable {
     }
     
     /// index如果超出范围则返回nil
+    @inlinable
     public subscript (safe index: Int) -> Element? {
         get { return indices ~= index ? self[index] : nil }
         set {

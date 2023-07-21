@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 // MARK: 音频播放器类型
-public protocol AudioPlayerType {
+public protocol ThenAudioPlayerType {
     
     @discardableResult
     func play() -> Bool
@@ -25,35 +25,35 @@ public protocol AudioPlayerType {
 }
 
 // MARK: 音频播放器的回调协议
-public protocol AudioPlayerDelegate: NSObjectProtocol {
+public protocol ThenAudioPlayerDelegate: NSObjectProtocol {
     
-    func audioPlayerDidFinishPlaying(_ player: AudioPlayerType, successfully flag: Bool)
-    func audioPlayerDecodeErrorDidOccur(_ player: AudioPlayerType, error: Error?)
-    func audioPlayerBeginInterruption(_ player: AudioPlayerType)
-    func audioPlayerEndInterruption(_ player: AudioPlayerType, withOptions flags: Int)
+    func audioPlayerDidFinishPlaying(_ player: ThenAudioPlayerType, successfully flag: Bool)
+    func audioPlayerDecodeErrorDidOccur(_ player: ThenAudioPlayerType, error: Error?)
+    func audioPlayerBeginInterruption(_ player: ThenAudioPlayerType)
+    func audioPlayerEndInterruption(_ player: ThenAudioPlayerType, withOptions flags: Int)
     
-    func audioPlayerRouteChange(_ player: AudioPlayerType, reason: AVAudioSession.RouteChangeReason)
-    func audioPlayerInterruptionChange(_ player: AudioPlayerType,
+    func audioPlayerRouteChange(_ player: ThenAudioPlayerType, reason: AVAudioSession.RouteChangeReason)
+    func audioPlayerInterruptionChange(_ player: ThenAudioPlayerType,
                                        type: AVAudioSession.InterruptionType,
                                        options: AVAudioSession.InterruptionOptions)
 }
 
 // MARK: 音频播放器的协议的默认空实现
-public extension AudioPlayerDelegate {
+public extension ThenAudioPlayerDelegate {
     
-    func audioPlayerDidFinishPlaying(_ player: AudioPlayerType, successfully flag: Bool) { }
-    func audioPlayerDecodeErrorDidOccur(_ player: AudioPlayerType, error: Error?) { }
-    func audioPlayerBeginInterruption(_ player: AudioPlayerType) { }
-    func audioPlayerEndInterruption(_ player: AudioPlayerType, withOptions flags: Int) { }
+    func audioPlayerDidFinishPlaying(_ player: ThenAudioPlayerType, successfully flag: Bool) { }
+    func audioPlayerDecodeErrorDidOccur(_ player: ThenAudioPlayerType, error: Error?) { }
+    func audioPlayerBeginInterruption(_ player: ThenAudioPlayerType) { }
+    func audioPlayerEndInterruption(_ player: ThenAudioPlayerType, withOptions flags: Int) { }
     
-    func audioPlayerRouteChange(_ player: AudioPlayerType, reason: AVAudioSession.RouteChangeReason) { }
-    func audioPlayerInterruptionChange(_ player: AudioPlayerType,
+    func audioPlayerRouteChange(_ player: ThenAudioPlayerType, reason: AVAudioSession.RouteChangeReason) { }
+    func audioPlayerInterruptionChange(_ player: ThenAudioPlayerType,
                                        type: AVAudioSession.InterruptionType,
                                        options: AVAudioSession.InterruptionOptions) { }
 }
 
 // MARK: 音频播放器
-open class AudioPlayer: NSObject, AudioPlayerType {
+open class ThenAudioPlayer: NSObject, ThenAudioPlayerType {
     
     @discardableResult
     open func play() -> Bool {
@@ -79,7 +79,7 @@ open class AudioPlayer: NSObject, AudioPlayerType {
     
     open internal(set) var player: AVAudioPlayer?
     
-    open weak var delegate: AudioPlayerDelegate?
+    open weak var delegate: ThenAudioPlayerDelegate?
     
     deinit {
         if player?.delegate != nil { player?.delegate = nil }
@@ -87,7 +87,7 @@ open class AudioPlayer: NSObject, AudioPlayerType {
         NotificationCenter.default.then.removeObserver(routeChangeToken)
     }
     
-    public init(contentsOf url: URL, fileTypeHint utiString: String?, delegate: AudioPlayerDelegate? = nil) {
+    public init(contentsOf url: URL, fileTypeHint utiString: String?, delegate: ThenAudioPlayerDelegate? = nil) {
         super.init()
         self.delegate = delegate
         do {
@@ -99,7 +99,7 @@ open class AudioPlayer: NSObject, AudioPlayerType {
         }
     }
     
-    public init(data: Data, fileTypeHint utiString: String?, delegate: AudioPlayerDelegate? = nil) {
+    public init(data: Data, fileTypeHint utiString: String?, delegate: ThenAudioPlayerDelegate? = nil) {
         super.init()
         self.delegate = delegate
         do {
@@ -111,7 +111,7 @@ open class AudioPlayer: NSObject, AudioPlayerType {
         }
     }
     
-    public init(forResource name: String?, ofType ext: String? = nil, delegate: AudioPlayerDelegate? = nil) {
+    public init(forResource name: String?, ofType ext: String? = nil, delegate: ThenAudioPlayerDelegate? = nil) {
         super.init()
         self.delegate = delegate
         guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
@@ -199,7 +199,7 @@ open class AudioPlayer: NSObject, AudioPlayerType {
 }
 
 // MARK: AVAudioPlayerDelegate
-extension AudioPlayer: AVAudioPlayerDelegate {
+extension ThenAudioPlayer: AVAudioPlayerDelegate {
     
     open func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         delegate?.audioPlayerDidFinishPlaying(self, successfully: flag)

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ThenFoundation'
-  s.version          = '0.0.6'
+  s.version          = '0.0.7'
   s.summary          = 'The Basic Foundation Framework'
 
 # This description is used to generate tags and improve search results.
