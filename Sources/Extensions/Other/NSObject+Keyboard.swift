@@ -85,14 +85,14 @@ public extension ThenExtension where T: NSObject {
 fileprivate extension NSObject {
     
     var kit_last_keyboard: ThenKeyBoard? {
-        get { return then.binded(for: &ThenKeyBoard.lastKeyboardKey) }
-        set { then.bind(object: newValue, for: &ThenKeyBoard.lastKeyboardKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get { return then.binded(for: ThenKeyBoard.lastKeyboardKey) }
+        set { then.bind(object: newValue, for: ThenKeyBoard.lastKeyboardKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 
 public struct ThenKeyBoard {
     
-    fileprivate static var lastKeyboardKey: String = "observer.keyboard.last.key"
+    @UniqueAddress static var lastKeyboardKey
     
     public typealias Closure = (Name, Info) -> Void
     

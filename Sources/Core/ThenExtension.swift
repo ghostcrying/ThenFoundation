@@ -7,17 +7,16 @@
 
 import Foundation.NSObject
 
-//MARK: - ThenExtension
-@dynamicMemberLookup
-public struct ThenExtension<T> {
-    
+// MARK: - ThenExtension
+
+@dynamicMemberLookup public struct ThenExtension<T> {
     public var value: T
-    
+
     @inlinable
     public init(_ value: T) {
         self.value = value
     }
-    
+
     @inlinable
     public subscript<Value>(
         dynamicMember keyPath: WritableKeyPath<T, Value>
@@ -28,18 +27,17 @@ public struct ThenExtension<T> {
             return ThenExtension(t)
         }
     }
-    
+
     /// May No Use
     @inlinable
-    public func dispose() { }
+    public func dispose() {}
 }
 
 public extension ThenExtension {
-    
     @inlinable
     @discardableResult
     func force(
-        _ handler: (inout T) -> ()
+        _ handler: (inout T) -> Void
     ) -> ThenExtension<T> {
         var object = value
         handler(&object)
@@ -50,32 +48,32 @@ public extension ThenExtension {
     @discardableResult
     func force<S>(
         _ s: S,
-        handler: (inout T, S) -> ()
+        handler: (inout T, S) -> Void
     ) -> ThenExtension<T> {
         var object = value
         handler(&object, s)
         return self
     }
-    
+
     @inlinable
     @discardableResult
     func force<S1, S2>(
         _ s1: S1,
         _ s2: S2,
-        handler: (inout T, S1, S2) -> ()
+        handler: (inout T, S1, S2) -> Void
     ) -> ThenExtension<T> {
         var object = value
         handler(&object, s1, s2)
         return self
     }
-    
+
     @inlinable
     @discardableResult
     func force<S1, S2, S3>(
         _ s1: S1,
         _ s2: S2,
         _ s3: S3,
-        handler: (inout T, S1, S2, S3) -> ()
+        handler: (inout T, S1, S2, S3) -> Void
     ) -> ThenExtension<T> {
         var object = value
         handler(&object, s1, s2, s3)
@@ -89,7 +87,7 @@ public extension ThenExtension {
         _ s2: S2,
         _ s3: S3,
         _ s4: S4,
-        handler: (inout T, S1, S2, S3, S4) -> ()
+        handler: (inout T, S1, S2, S3, S4) -> Void
     ) -> ThenExtension<T> {
         var object = value
         handler(&object, s1, s2, s3, s4)
@@ -97,31 +95,28 @@ public extension ThenExtension {
     }
 }
 
+// MARK: - ThenExtensionCompatible
 
-//MARK: - ThenExtensionCompatible
 public protocol ThenExtensionCompatible {
-    
     associatedtype CompatibleType
-    
+
     static var then: ThenExtension<CompatibleType>.Type { get set }
-    
+
     var then: ThenExtension<CompatibleType> { get set }
 }
 
-extension ThenExtensionCompatible {
-    
-    public static var then: ThenExtension<Self>.Type {
+public extension ThenExtensionCompatible {
+    static var then: ThenExtension<Self>.Type {
         get { return ThenExtension<Self>.self }
-        set {  }
+        set {}
     }
-    
-    public var then: ThenExtension<Self> {
+
+    var then: ThenExtension<Self> {
         get { return ThenExtension(self) }
-        set {  }
+        set {}
     }
 }
 
+// MARK: - NSObject
 
-//MARK: - NSObject
-extension NSObject: ThenExtensionCompatible {  }
-
+extension NSObject: ThenExtensionCompatible {}

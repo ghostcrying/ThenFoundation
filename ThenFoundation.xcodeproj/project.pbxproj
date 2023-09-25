@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E32BA072AC16B2C00E0551D /* ThenUniqueAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E32BA062AC16B2C00E0551D /* ThenUniqueAddress.swift */; };
 		9E525B7E29CAA6FD001AC37E /* ThenFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E525B7529CAA6FD001AC37E /* ThenFoundation.framework */; };
-		9E525B8329CAA6FD001AC37E /* ThenFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */; };
 		9E525BC929CAA7D3001AC37E /* ThenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B8F29CAA7D2001AC37E /* ThenExtension.swift */; };
 		9E525BCA29CAA7D3001AC37E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B9129CAA7D2001AC37E /* Reachability.swift */; };
 		9E525BCB29CAA7D3001AC37E /* StatisticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525B9229CAA7D2001AC37E /* StatisticsProtocol.swift */; };
@@ -73,10 +73,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E32B9FC2AC1555500E0551D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9E32B9FD2AC1555500E0551D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		9E32BA062AC16B2C00E0551D /* ThenUniqueAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThenUniqueAddress.swift; sourceTree = "<group>"; };
 		9E48C8A32A493954005C260D /* ThenFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThenFoundation.podspec; sourceTree = "<group>"; };
 		9E525B7529CAA6FD001AC37E /* ThenFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThenFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E525B7D29CAA6FD001AC37E /* ThenFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThenFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThenFoundationTests.swift; sourceTree = "<group>"; };
 		9E525B8F29CAA7D2001AC37E /* ThenExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThenExtension.swift; sourceTree = "<group>"; };
 		9E525B9129CAA7D2001AC37E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9E525B9229CAA7D2001AC37E /* StatisticsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsProtocol.swift; sourceTree = "<group>"; };
@@ -152,9 +154,10 @@
 		9E525B6B29CAA6FD001AC37E = {
 			isa = PBXGroup;
 			children = (
+				9E32B9FD2AC1555500E0551D /* Package.swift */,
 				9E48C8A32A493954005C260D /* ThenFoundation.podspec */,
+				9E32B9FC2AC1555500E0551D /* README.md */,
 				9E525B8D29CAA7D2001AC37E /* Sources */,
-				9E525B8129CAA6FD001AC37E /* ThenFoundationTests */,
 				9E525B7629CAA6FD001AC37E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,14 +169,6 @@
 				9E525B7D29CAA6FD001AC37E /* ThenFoundationTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9E525B8129CAA6FD001AC37E /* ThenFoundationTests */ = {
-			isa = PBXGroup;
-			children = (
-				9E525B8229CAA6FD001AC37E /* ThenFoundationTests.swift */,
-			);
-			path = ThenFoundationTests;
 			sourceTree = "<group>";
 		};
 		9E525B8D29CAA7D2001AC37E /* Sources */ = {
@@ -214,6 +209,7 @@
 				9E525B9429CAA7D2001AC37E /* ThenResource.swift */,
 				9E525B9629CAA7D2001AC37E /* ThenConstrant.swift */,
 				9E525B9B29CAA7D2001AC37E /* ThenProtected.swift */,
+				9E32BA062AC16B2C00E0551D /* ThenUniqueAddress.swift */,
 				9E525B9D29CAA7D2001AC37E /* ThenCancelablePerform.swift */,
 				9E525B9729CAA7D2001AC37E /* Keychain */,
 			);
@@ -448,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E32BA072AC16B2C00E0551D /* ThenUniqueAddress.swift in Sources */,
 				9E525BDD29CAA7D3001AC37E /* Sequence+JSON.swift in Sources */,
 				9E525BCD29CAA7D3001AC37E /* ThenMature.swift in Sources */,
 				9E525BE129CAA7D3001AC37E /* NSPredicate++.swift in Sources */,
@@ -504,7 +501,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E525B8329CAA6FD001AC37E /* ThenFoundationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

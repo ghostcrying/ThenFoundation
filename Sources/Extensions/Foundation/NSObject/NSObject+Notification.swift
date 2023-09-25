@@ -39,14 +39,14 @@ public extension ThenExtension where T: NSObject {
 fileprivate extension NSObject {
     
     var kit_notificationTargets: [ObserverNotificationTarget]? {
-        get { return then.binded(for: &ObserverNotificationTarget.targetKey) }
-        set { then.bind(object: newValue, for: &ObserverNotificationTarget.targetKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get { return then.binded(for: ObserverNotificationTarget.targetKey) }
+        set { then.bind(object: newValue, for: ObserverNotificationTarget.targetKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 
 final fileprivate class ObserverNotificationTarget: NSObject {
     
-    fileprivate static var targetKey: String = "observer.notification.target.key"
+    @UniqueAddress static var targetKey
     
     let selector: Selector = #selector(ObserverNotificationTarget.eventHandler(_:))
     let name: Notification.Name?

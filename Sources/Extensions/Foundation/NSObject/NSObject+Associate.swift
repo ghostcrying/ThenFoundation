@@ -9,22 +9,22 @@ import Foundation
 
 private struct ThenObjectAssociateKeys {
     
-    static var tag:     String = "object.then.tag"
-    static var info:    String = "object.then.info"
+    @UniqueAddress static var tag
+    @UniqueAddress static var info
 }
 
 public extension ThenExtension where T: NSObject {
     
     /// associated object
     var tag: Int {
-        get { return value.then.binded(for: &ThenObjectAssociateKeys.tag) ?? 0 }
-        set { value.then.bind(object: newValue, for: &ThenObjectAssociateKeys.tag, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
+        get { return value.then.binded(for: ThenObjectAssociateKeys.tag) ?? 0 }
+        set { value.then.bind(object: newValue, for: ThenObjectAssociateKeys.tag, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
     }
     
     /// associated object
     var info: [AnyHashable: Any] {
-        get { return value.then.binded(for: &ThenObjectAssociateKeys.info) ?? [:] }
-        set { value.then.bind(object: newValue, for: &ThenObjectAssociateKeys.info, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
+        get { return value.then.binded(for: ThenObjectAssociateKeys.info) ?? [:] }
+        set { value.then.bind(object: newValue, for: ThenObjectAssociateKeys.info, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
     }
 }
 
