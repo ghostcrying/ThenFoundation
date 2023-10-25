@@ -36,10 +36,20 @@ import Foundation.NSObject
 public extension ThenExtension {
     @inlinable
     @discardableResult
+    func then(
+        _ handler: (inout T) throws -> Void
+    ) rethrows -> ThenExtension<T> {
+        var object = self.value
+        try handler(&object)
+        return self
+    }
+    
+    @inlinable
+    @discardableResult
     func force(
         _ handler: (inout T) -> Void
     ) -> ThenExtension<T> {
-        var object = value
+        var object = self.value
         handler(&object)
         return self
     }
@@ -50,7 +60,7 @@ public extension ThenExtension {
         _ s: S,
         handler: (inout T, S) -> Void
     ) -> ThenExtension<T> {
-        var object = value
+        var object = self.value
         handler(&object, s)
         return self
     }
@@ -62,7 +72,7 @@ public extension ThenExtension {
         _ s2: S2,
         handler: (inout T, S1, S2) -> Void
     ) -> ThenExtension<T> {
-        var object = value
+        var object = self.value
         handler(&object, s1, s2)
         return self
     }
@@ -75,7 +85,7 @@ public extension ThenExtension {
         _ s3: S3,
         handler: (inout T, S1, S2, S3) -> Void
     ) -> ThenExtension<T> {
-        var object = value
+        var object = self.value
         handler(&object, s1, s2, s3)
         return self
     }
@@ -89,7 +99,7 @@ public extension ThenExtension {
         _ s4: S4,
         handler: (inout T, S1, S2, S3, S4) -> Void
     ) -> ThenExtension<T> {
-        var object = value
+        var object = self.value
         handler(&object, s1, s2, s3, s4)
         return self
     }
@@ -117,6 +127,6 @@ public extension ThenExtensionCompatible {
     }
 }
 
-// MARK: - NSObject
+// MARK: - NSObject + ThenExtensionCompatible
 
 extension NSObject: ThenExtensionCompatible {}
