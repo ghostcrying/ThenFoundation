@@ -219,8 +219,8 @@
 		9E525B9729CAA7D2001AC37E /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
-				9E525B9829CAA7D2001AC37E /* KeychainSwift.swift */,
 				9E525B9929CAA7D2001AC37E /* TegKeychainConstants.swift */,
+				9E525B9829CAA7D2001AC37E /* KeychainSwift.swift */,
 				9E525B9A29CAA7D2001AC37E /* KeychainSwiftAccessOptions.swift */,
 			);
 			path = Keychain;

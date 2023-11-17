@@ -36,7 +36,7 @@ import Foundation.NSObject
 public extension ThenExtension {
     @inlinable
     @discardableResult
-    func then(
+    func force(
         _ handler: (inout T) throws -> Void
     ) rethrows -> ThenExtension<T> {
         var object = self.value
